@@ -1,0 +1,2147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JobDue - Offline Job & Payment Tracker for Contractors</title>
+  <meta name="description" content="JobDue helps solo contractors track jobs, follow-ups, unpaid balances, and payments without logins, spreadsheets, or monthly software fees.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#eef6ff">
+  <link rel="canonical" href="https://app.hi-craniai.workers.dev/">
+  <link rel="icon" href="assets/jobdue-icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/jobdue-apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://app.hi-craniai.workers.dev/">
+  <meta property="og:title" content="JobDue - Offline Job & Payment Tracker for Contractors">
+  <meta property="og:description" content="Track jobs, unpaid balances, follow-ups, and payments without logins or monthly software fees.">
+  <meta property="og:image" content="https://app.hi-craniai.workers.dev/assets/jobdue-og-image.jpg">
+  <meta property="og:image:alt" content="JobDue offline job and payment tracker preview with Today dashboard.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="JobDue">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JobDue - Offline Job & Payment Tracker for Contractors">
+  <meta name="twitter:description" content="Track jobs, unpaid balances, follow-ups, and payments without logins or monthly software fees.">
+  <meta name="twitter:image" content="https://app.hi-craniai.workers.dev/assets/jobdue-og-image.jpg">
+  <meta name="twitter:image:alt" content="JobDue offline job and payment tracker preview with Today dashboard.">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPRKXVD7DZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-VPRKXVD7DZ');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "JobDue",
+    "url": "https://app.hi-craniai.workers.dev/",
+    "image": "https://app.hi-craniai.workers.dev/assets/jobdue-og-image.jpg",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web browser",
+    "description": "Job, payment, and follow-up tracker for solo contractors and home-service pros.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CraniaI",
+      "url": "https://app.hi-craniai.workers.dev/"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "14.99",
+      "priceCurrency": "USD",
+      "url": "https://gumroad.com/l/jobdue-launch-placeholder",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #eef5f7;
+      --panel: #ffffff;
+      --ink: #162326;
+      --ink-strong: #07151a;
+      --muted: #53666b;
+      --muted-2: #758195;
+      --primary: #247c82;
+      --teal: #12a087;
+      --blue: #155a60;
+      --gold: #d97706;
+      --line: #d9e5f2;
+      --line-dark: #b9c8db;
+      --soft: #f7fbff;
+      --soft-blue: #e4f0ff;
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.13);
+      --shadow-soft: 0 14px 36px rgba(15, 23, 42, 0.08);
+      --radius: 8px;
+      --max: 1180px;
+      --h1-size: clamp(2.75rem, 4.6vw, 4.2rem);
+      --h2-size: clamp(2rem, 3.3vw, 2.85rem);
+      --h3-size: clamp(1.18rem, 1.45vw, 1.38rem);
+      --label-size: clamp(1rem, 0.94rem + 0.16vw, 1.08rem);
+      --section-space: clamp(4.5rem, 7vw, 6.75rem);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    img {
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--ink-strong);
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin-bottom: 22px;
+      font-size: var(--h1-size);
+      line-height: 0.98;
+      font-weight: 850;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: var(--h2-size);
+      line-height: 1.06;
+      font-weight: 850;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: var(--h3-size);
+      line-height: 1.2;
+      font-weight: 820;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(99, 91, 255, 0.36);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(185, 200, 219, 0.72);
+      background: rgba(238, 246, 255, 0.92);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--ink-strong);
+      font-size: 1.42rem;
+      font-weight: 900;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand img {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: #46556a;
+      font-size: 1rem;
+      font-weight: 850;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      padding: 0 18px;
+      font-weight: 900;
+      line-height: 1;
+      text-decoration: none;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      white-space: nowrap;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 14px 32px rgba(36, 124, 130, 0.25);
+    }
+
+    .button-primary:hover {
+      background: #155a60;
+    }
+
+    .button-secondary {
+      border-color: rgba(16, 24, 39, 0.18);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--ink-strong);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      border-radius: var(--radius);
+      background: transparent;
+      padding: 0;
+      color: var(--ink-strong);
+      font-size: var(--label-size);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: none;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--teal);
+    }
+
+    .section-head.center .eyebrow::before {
+      width: 36px;
+      height: 4px;
+    }
+
+    .hero {
+      position: relative;
+      padding: 72px 0 84px;
+      overflow: hidden;
+      background:
+        linear-gradient(107deg, #0d1628 0%, #121f35 52%, rgba(238, 245, 247, 0.96) 52.2%, rgba(238, 245, 247, 0.96) 100%);
+      color: #fff;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -8vw;
+      bottom: -42px;
+      width: 54vw;
+      height: 190px;
+      background: rgba(207, 229, 255, 0.78);
+      transform: skewY(-8deg);
+      z-index: 0;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(620px, 1.14fr);
+      gap: 38px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      max-width: 590px;
+    }
+
+    .hero .eyebrow {
+      color: #eaf7f7;
+      white-space: nowrap;
+    }
+
+    .hero-mobile-break {
+      display: none;
+    }
+
+    .hero h1 {
+      color: #fff;
+      font-size: clamp(2.85rem, 4.25vw, 4.05rem);
+    }
+
+    .lead {
+      max-width: 650px;
+      margin-bottom: 0;
+      color: #d8e4ef;
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .hero .button-primary {
+      background: #258d91;
+      box-shadow: 0 16px 34px rgba(37, 141, 145, 0.34);
+    }
+
+    .hero .button-secondary {
+      border-color: rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .hero-offer {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .hero-price {
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+    }
+
+    .hero-price span {
+      color: #fff;
+      font-size: clamp(2.2rem, 4.2vw, 3rem);
+      font-weight: 950;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-price strong {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 5px;
+      color: #73e2d6;
+      font-size: 0.94rem;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .hero-offer .hero-actions {
+      flex-wrap: nowrap;
+      margin-top: 0;
+    }
+
+    .hero-offer-chips {
+      display: grid;
+      gap: 10px;
+      max-width: 340px;
+      margin-top: 2px;
+    }
+
+    .hero-offer-chip {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid rgba(216, 229, 242, 0.92);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.98);
+      padding: 8px 16px 8px 8px;
+      color: var(--ink-strong);
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.16);
+    }
+
+    .hero-offer-chip strong,
+    .hero-offer-chip span {
+      display: block;
+    }
+
+    .hero-offer-chip strong {
+      font-size: 1.01rem;
+      font-weight: 930;
+      line-height: 1.05;
+    }
+
+    .hero-offer-chip div span {
+      margin-top: 2px;
+      color: #455966;
+      font-size: 0.82rem;
+      font-weight: 820;
+      line-height: 1.12;
+    }
+
+    .chip-dot {
+      position: relative;
+      display: block;
+      flex: 0 0 36px;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--primary);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .chip-dot::before {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #eaffff;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1;
+      text-align: center;
+      transform: translateY(0.5px);
+    }
+
+    .chip-money::before {
+      content: "$";
+      font-size: 0.78rem;
+    }
+
+    .chip-zip::before {
+      content: "ZIP";
+      font-size: 0.58rem;
+      text-transform: uppercase;
+    }
+
+    .mini-proof {
+      display: grid;
+      max-width: 540px;
+      margin-top: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(21, 90, 96, 0.18);
+      border-radius: 16px;
+      background: #ffffff;
+      box-shadow: 0 18px 44px rgba(15, 23, 42, 0.1);
+    }
+
+    .mini-proof article {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      padding: 15px 18px;
+    }
+
+    .mini-proof article + article {
+      border-top: 1px solid var(--line);
+    }
+
+    .mini-proof .proof-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: #e6f7f5;
+      padding: 7px 10px;
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 950;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .mini-proof strong {
+      display: block;
+      color: var(--ink-strong);
+      font-size: 1.02rem;
+      line-height: 1.12;
+    }
+
+    .mini-proof .proof-detail {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.83rem;
+      font-weight: 750;
+      line-height: 1.22;
+    }
+
+    .screenshot-shell {
+      position: relative;
+      isolation: isolate;
+      border: 1px solid rgba(16, 24, 39, 0.16);
+      border-radius: 18px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(245, 251, 252, 0.96)),
+        #ffffff;
+      padding: 14px;
+      box-shadow:
+        0 34px 80px rgba(15, 23, 42, 0.16),
+        0 0 0 1px rgba(255, 255, 255, 0.74) inset;
+      transform: none;
+      justify-self: end;
+    }
+
+    .screenshot-shell::before {
+      content: "";
+      position: absolute;
+      inset: -22px -18px 24px 16px;
+      z-index: -1;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 72% 18%, rgba(36, 124, 130, 0.24), transparent 34%),
+        radial-gradient(circle at 22% 92%, rgba(216, 234, 255, 0.8), transparent 36%);
+      filter: blur(10px);
+      opacity: 0.9;
+    }
+
+    .screenshot-shell::after {
+      content: "";
+      position: absolute;
+      right: 28px;
+      bottom: -22px;
+      z-index: -1;
+      width: 54%;
+      height: 86px;
+      border-radius: 999px;
+      background: rgba(36, 124, 130, 0.13);
+      filter: blur(18px);
+    }
+
+    .screenshot-shell > img {
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(16, 24, 39, 0.08);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.09);
+    }
+
+    .screenshot-badge {
+      position: absolute;
+      top: -15px;
+      right: 22px;
+      z-index: 4;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      background: rgba(21, 90, 96, 0.94);
+      padding: 8px 12px;
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 950;
+      letter-spacing: 0.02em;
+      box-shadow: 0 14px 32px rgba(21, 90, 96, 0.24);
+    }
+
+    .hero-callouts {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .hero-callout {
+      display: grid;
+      gap: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      border-left: 7px solid var(--teal);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.96);
+      padding: 12px 14px 12px 12px;
+      color: var(--ink-strong);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.17);
+    }
+
+    .hero-callout strong {
+      display: block;
+      font-size: clamp(1.1rem, 1.8vw, 1.42rem);
+      font-weight: 950;
+      line-height: 0.95;
+    }
+
+    .hero-callout span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 850;
+      line-height: 1.15;
+    }
+
+    .hero-callout.balance {
+      border-left-color: var(--gold);
+    }
+
+    .hero-callout.follow {
+      border-left-color: #2f80ed;
+    }
+
+    .caption-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 2px 0;
+      color: var(--muted);
+      font-size: 0.83rem;
+      font-weight: 720;
+    }
+
+    .caption-row b {
+      color: var(--ink-strong);
+    }
+
+    .caption-links {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+      text-align: right;
+    }
+
+    .caption-links a {
+      display: inline-flex;
+      min-height: 34px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(36, 124, 130, 0.22);
+      border-radius: 999px;
+      background: #e6f7f5;
+      padding: 0 12px;
+      color: var(--primary-dark);
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 10px 22px rgba(36, 124, 130, 0.14);
+      transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+    }
+
+    .caption-links a::after {
+      content: "→";
+      margin-left: 7px;
+      font-weight: 950;
+    }
+
+    .caption-links a:hover {
+      background: #d8f3f0;
+      box-shadow: 0 14px 28px rgba(36, 124, 130, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .hero-video-preview {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+      margin-top: 12px;
+      border: 1px solid rgba(36, 124, 130, 0.18);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.94);
+      padding: 10px 12px 10px 10px;
+      color: var(--ink-strong);
+      text-decoration: none;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.13);
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .hero-video-preview:hover {
+      border-color: rgba(36, 124, 130, 0.42);
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.17);
+      transform: translateY(-1px);
+    }
+
+    .hero-video-thumb {
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #e8f1f3;
+    }
+
+    .hero-video-thumb img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    .hero-play {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 950;
+      text-shadow: 0 2px 14px rgba(7, 21, 26, 0.52);
+    }
+
+    .hero-play::before {
+      content: "";
+      position: absolute;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      background: rgba(36, 124, 130, 0.92);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.28);
+    }
+
+    .hero-play span {
+      position: relative;
+      transform: translateX(1px);
+    }
+
+    .hero-video-copy {
+      display: grid;
+      gap: 4px;
+    }
+
+    .hero-video-copy strong {
+      color: var(--ink-strong);
+      font-size: 1rem;
+      font-weight: 950;
+      line-height: 1.12;
+    }
+
+    .hero-video-copy span {
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 760;
+      line-height: 1.25;
+    }
+
+    .section {
+      padding: var(--section-space) 0;
+      background: #fff;
+    }
+
+    .section[id] {
+      scroll-margin-top: 116px;
+    }
+
+    .section-blue {
+      background: var(--soft);
+    }
+
+    .section-dark {
+      background: #0d1628;
+      color: #fff;
+    }
+
+    .section-dark h2,
+    .section-dark h3,
+    .section-dark .eyebrow {
+      color: #fff;
+    }
+
+    .section-dark .eyebrow::before,
+    .final-cta .eyebrow::before {
+      background: #2dd4bf;
+    }
+
+    .section-dark p,
+    .section-dark li {
+      color: #c6d2e2;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 38px;
+    }
+
+    .section-head.center {
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    .section-head.center .eyebrow {
+      justify-content: center;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 28px;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.56);
+      padding: 28px 0;
+    }
+
+    .trust-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .trust-item,
+    .feature-card,
+    .step,
+    .faq-item,
+    .video-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .trust-item strong {
+      display: block;
+      color: var(--ink-strong);
+      font-size: 1.3rem;
+    }
+
+    .trust-item span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 740;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      min-height: 218px;
+    }
+
+    .problem-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink-strong);
+      font-size: 1.08rem;
+    }
+
+    .feature-card .kicker {
+      display: inline-flex;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: var(--soft-blue);
+      padding: 8px 12px;
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 18px;
+      align-items: start;
+      border-radius: 16px;
+      box-shadow: none;
+    }
+
+    .steps {
+      position: relative;
+      padding-left: 8px;
+    }
+
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 24px;
+      bottom: 24px;
+      left: 40px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--teal), var(--primary));
+    }
+
+    .step-number {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 54px;
+      height: 54px;
+      place-items: center;
+      border: 5px solid #fff;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 950;
+      box-shadow: 0 14px 28px rgba(36, 124, 130, 0.26);
+    }
+
+    .product-showcase {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .showcase-panel {
+      width: min(920px, 100%);
+      margin: 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      background: #111d32;
+      padding: 12px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .showcase-panel img {
+      width: 100%;
+      height: auto;
+      border-radius: 9px;
+      background: #fff;
+      object-fit: contain;
+    }
+
+    .showcase-intro {
+      max-width: 790px;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    .showcase-intro .eyebrow {
+      justify-content: center;
+    }
+
+    .showcase-intro .eyebrow::before {
+      width: 36px;
+      height: 4px;
+    }
+
+    .showcase-controls {
+      width: min(920px, 100%);
+      margin: 0 auto;
+    }
+
+    .showcase-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .showcase-list li {
+      display: block;
+    }
+
+    .showcase-button {
+      display: grid;
+      width: 100%;
+      min-height: 96px;
+      grid-template-columns: 1fr;
+      align-items: start;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 16px;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .showcase-button:hover,
+    .showcase-button[aria-selected="true"] {
+      border-color: rgba(45, 212, 191, 0.5);
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .showcase-list b {
+      display: block;
+      margin-bottom: 4px;
+      color: #fff;
+      font-size: 1.05rem;
+      line-height: 1.2;
+    }
+
+    .showcase-list span {
+      display: block;
+      color: #c6d2e2;
+      font-size: 0.94rem;
+      line-height: 1.45;
+    }
+
+    .showcase-list .showcase-thumb {
+      display: none;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .showcase-list .showcase-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .showcase-note {
+      margin: 12px 2px 0;
+      color: #9fb0c8;
+      font-size: 0.82rem;
+      font-weight: 720;
+      text-align: center;
+    }
+
+    .showcase-controls .hero-actions {
+      justify-content: center;
+    }
+
+    .video-feature {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .video-frame {
+      overflow: hidden;
+      border: 1px solid var(--line-dark);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .video-frame video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .setup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .video-card {
+      padding: 14px;
+    }
+
+    .video-card video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius);
+      background: #101827;
+      object-fit: cover;
+    }
+
+    .video-card h3 {
+      margin: 16px 6px 6px;
+    }
+
+    .video-card p {
+      margin: 0 6px 6px;
+      font-size: 0.96rem;
+    }
+
+    #setup-videos .video-card {
+      display: grid;
+      justify-items: center;
+      align-content: start;
+      padding: 24px;
+      text-align: center;
+    }
+
+    #setup-videos .video-card video {
+      width: min(100%, 280px);
+      aspect-ratio: 9 / 16;
+      object-fit: contain;
+      border-radius: 16px;
+      box-shadow: 0 18px 44px rgba(15, 23, 42, 0.18);
+    }
+
+    #setup-videos .video-card h3,
+    #setup-videos .video-card p {
+      justify-self: center;
+      max-width: 360px;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    #setup-videos .video-card h3 {
+      margin-top: 18px;
+      color: var(--ink-strong);
+      font-size: 1.26rem;
+    }
+
+    #setup-videos .video-card p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 30px;
+      align-items: center;
+      border: 1px solid var(--line-dark);
+      border-radius: 16px;
+      background: #fff;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .price-card {
+      border-radius: 12px;
+      background:
+        linear-gradient(145deg, rgba(36, 124, 130, 0.24), transparent 48%),
+        #0d1628;
+      padding: 30px;
+      color: #fff;
+    }
+
+    .price-card h3 {
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .price-card p {
+      color: #c6d2e2;
+    }
+
+    .price {
+      margin: 12px 0 4px;
+      color: #fff;
+      font-size: clamp(3rem, 7vw, 4.8rem);
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    .price small {
+      color: #aebbd0;
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    .price-promo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: rgba(0, 168, 143, 0.18);
+      padding: 8px 12px;
+      color: #dffcf6;
+      font-weight: 950;
+    }
+
+    .discount-pill {
+      display: inline-flex;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      background: rgba(45, 212, 191, 0.14);
+      padding: 8px 12px;
+      color: #b9f2ee;
+      font-size: 0.88rem;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    .regular-price {
+      color: #aebbd0;
+      font-size: 1.15rem;
+      font-weight: 850;
+      text-decoration: line-through;
+      text-decoration-color: rgba(217, 119, 6, 0.95);
+      text-decoration-thickness: 3px;
+    }
+
+    .included {
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      columns: auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .included li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 9px 14px;
+      color: var(--ink);
+      font-size: 0.94rem;
+      font-weight: 820;
+      line-height: 1.25;
+    }
+
+    .included li::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--teal);
+    }
+
+    .about-contact {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .about-panel,
+    .contact-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+      padding: clamp(24px, 3vw, 34px);
+    }
+
+    .about-panel p,
+    .contact-panel p {
+      margin-bottom: 0;
+    }
+
+    .contact-panel {
+      background: #0d1628;
+      color: #fff;
+    }
+
+    .contact-panel h3,
+    .contact-panel p {
+      color: #fff;
+    }
+
+    .contact-panel .eyebrow {
+      color: #b9f2ee;
+    }
+
+    .contact-panel p {
+      color: #c6d2e2;
+    }
+
+    .contact-options {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .contact-option {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 14px 16px;
+    }
+
+    .contact-option strong {
+      color: #fff;
+      font-size: 0.98rem;
+    }
+
+    .contact-option a {
+      color: #b9f2ee;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    #faq-title {
+      white-space: nowrap;
+    }
+
+    .faq-item {
+      box-shadow: none;
+    }
+
+    .final-cta {
+      padding: 82px 0;
+      background: #0d1628;
+      color: #fff;
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      color: #fff;
+    }
+
+    .final-cta .eyebrow {
+      color: #b9f2ee;
+    }
+
+    .final-cta p {
+      max-width: 640px;
+      margin-right: auto;
+      margin-left: auto;
+      color: #c6d2e2;
+    }
+
+    .final-cta .hero-actions {
+      justify-content: center;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      background: #fff;
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+    }
+
+    @media (max-width: 1080px) {
+      .trust-strip,
+      .workflow,
+      .product-showcase,
+      .video-feature,
+      .about-contact,
+      .pricing {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 0.78fr) minmax(470px, 1.22fr);
+        gap: 24px;
+      }
+
+      .hero-copy {
+        max-width: none;
+      }
+
+      .hero-offer-chips {
+        max-width: 320px;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .nav-links a:not(.button) {
+        display: none;
+      }
+
+      .feature-grid,
+      .trust-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .showcase-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        background: #0d1628;
+      }
+
+      .hero::after {
+        display: none;
+      }
+
+      .screenshot-shell {
+        transform: none;
+        justify-self: stretch;
+      }
+
+      .hero-callouts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      body {
+        font-size: 16px;
+      }
+
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .nav {
+        position: relative;
+        min-height: 72px;
+      }
+
+      .brand img {
+        width: 44px;
+        height: 44px;
+      }
+
+      .brand span {
+        font-size: 1rem;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        display: none;
+        margin-left: auto;
+        gap: 0;
+        min-width: 0;
+      }
+
+      .nav-links .button {
+        min-height: 40px;
+        width: auto;
+        min-width: 62px;
+        padding: 0 12px;
+        font-size: 0.92rem;
+      }
+
+      .nav-links .button {
+        font-size: 0;
+      }
+
+      .nav-links .button::after {
+        content: "Get";
+        font-size: 0.92rem;
+      }
+
+      h1 {
+        font-size: 2.62rem;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+        line-height: 1.03;
+      }
+
+      .hero-mobile-break {
+        display: inline;
+      }
+
+      h2 {
+        font-size: 2.05rem;
+      }
+
+      #faq-title {
+        white-space: normal;
+      }
+
+      .hero,
+      .section,
+      .final-cta {
+        padding: 56px 0;
+      }
+
+      .hero-grid {
+        gap: 30px;
+      }
+
+      .hero-copy,
+      .lead {
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      .lead {
+        font-size: 1rem;
+      }
+
+      .hero .eyebrow {
+        white-space: normal;
+      }
+
+      .hero-actions,
+      .final-cta .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .button,
+      .final-cta .hero-actions .button {
+        width: 100%;
+      }
+
+      .mini-proof,
+      .feature-grid,
+      .setup-grid,
+      .showcase-list,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-list li {
+        display: block;
+      }
+
+      .showcase-button {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .showcase-thumb {
+        aspect-ratio: 16 / 10;
+      }
+
+      .hero-price {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .hero-price strong {
+        margin-bottom: 0;
+      }
+
+      .hero-offer .hero-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 10px;
+      }
+
+      .hero-offer .hero-actions .button {
+        width: 100%;
+        flex: none;
+        min-width: 0;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.05;
+        padding-right: 10px;
+        padding-left: 10px;
+        font-size: 0.88rem;
+      }
+
+      .hero-offer-chips {
+        max-width: none;
+      }
+
+      .step {
+        grid-template-columns: 54px 1fr;
+        gap: 14px;
+      }
+
+      .step-number {
+        width: 46px;
+        height: 46px;
+        border-width: 4px;
+      }
+
+      .included {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing {
+        padding: 16px;
+      }
+
+      .caption-row,
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .caption-links {
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      .hero-callouts {
+        grid-template-columns: 1fr;
+        order: 3;
+      }
+
+      .screenshot-shell {
+        display: grid;
+        gap: 10px;
+      }
+
+      .screenshot-shell > img {
+        order: 1;
+      }
+
+      .caption-row {
+        order: 2;
+      }
+
+      .hero-video-preview {
+        grid-template-columns: 108px minmax(0, 1fr);
+        order: 4;
+      }
+
+      .screenshot-badge {
+        top: -14px;
+        right: 16px;
+      }
+
+      .hero-offer .hero-actions .button {
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="JobDue home">
+        <img src="assets/jobdue-icon-192.png" alt="" width="56" height="56">
+        <span>JobDue</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#how-it-works">How to Use It</a>
+        <a href="infographics.html">What&rsquo;s Included</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#about">About</a>
+        <a class="button button-primary" href="https://gumroad.com/l/jobdue-launch-placeholder">Get JobDue</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">For solo service pros</span>
+          <h1 id="hero-title">Stop running jobs from texts, notes, and memory.</h1>
+          <p class="lead">JobDue turns job notes, follow-ups, and balances into a simple daily check before work starts.</p>
+          <div class="hero-offer" aria-label="JobDue early bird offer">
+            <div class="hero-price">
+              <span>$14.99</span>
+              <strong>50% off launch link</strong>
+            </div>
+            <div class="hero-actions">
+              <a class="button button-primary" href="https://gumroad.com/l/jobdue-launch-placeholder">Get JobDue</a>
+              <a class="button button-secondary" href="#pricing">See what is included</a>
+            </div>
+            <div class="hero-offer-chips">
+              <div class="hero-offer-chip">
+                <span class="chip-dot chip-money" aria-hidden="true"></span>
+                <div>
+                  <strong>No monthly bill</strong>
+                  <span>One-time digital product</span>
+                </div>
+              </div>
+              <div class="hero-offer-chip">
+                <span class="chip-dot chip-zip" aria-hidden="true"></span>
+                <div>
+                  <strong>Download after purchase</strong>
+                  <span>Use on your own device</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <figure class="screenshot-shell">
+          <span class="screenshot-badge">Real Today screen</span>
+          <img
+            src="assets/jobdue-today-money-to-collect-desktop-2x.png"
+            srcset="assets/jobdue-today-money-to-collect-desktop.png 1440w, assets/jobdue-today-money-to-collect-desktop-2x.png 2880w"
+            sizes="(max-width: 860px) calc(100vw - 28px), (max-width: 1080px) 58vw, 720px"
+            alt="JobDue Today dashboard showing money to collect, follow-ups, and job payment status"
+            width="2880"
+            height="2000"
+            decoding="async"
+            fetchpriority="high">
+          <div class="hero-callouts" aria-label="JobDue Today dashboard highlights">
+            <span class="hero-callout collect"><strong>$480</strong><span>Collect today</span></span>
+            <span class="hero-callout balance"><strong>$1,980</strong><span>Open unpaid balance</span></span>
+            <span class="hero-callout follow"><strong>2 due</strong><span>Follow-ups before work</span></span>
+          </div>
+          <figcaption class="caption-row">
+            <span><b>Today view:</b> unpaid balances, follow-ups, and next actions in one place.</span>
+            <span class="caption-links">
+              <span>Real JobDue screenshot</span>
+              <a href="infographics.html">View product guide</a>
+            </span>
+          </figcaption>
+          <a class="hero-video-preview" href="#video" aria-label="Watch the JobDue two-minute product demo">
+            <span class="hero-video-thumb">
+              <img src="assets/jobdue-guide-cover.webp" alt="" width="3651" height="2739" loading="lazy" decoding="async">
+              <span class="hero-play" aria-hidden="true"><span>&#9658;</span></span>
+            </span>
+            <span class="hero-video-copy">
+              <strong>Watch 2-minute demo</strong>
+              <span>See how jobs, balances, and follow-ups stay visible.</span>
+            </span>
+          </a>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section-blue">
+      <div class="container trust-strip">
+        <div>
+          <span class="eyebrow">The daily admin problem</span>
+          <h2>Finished jobs should not disappear into texts and memory.</h2>
+          <p>When job details live across texts, notes, paper, invoices, and memory, unpaid balances and follow-ups are easy to miss.</p>
+        </div>
+        <div class="trust-list">
+          <div class="trust-item problem-card">
+            <strong>Unpaid balances get buried</strong>
+            <span>After the next job starts</span>
+          </div>
+          <div class="trust-item problem-card">
+            <strong>Estimate follow-ups drift</strong>
+            <span>When they only live in old messages</span>
+          </div>
+          <div class="trust-item problem-card">
+            <strong>Full software feels heavy</strong>
+            <span>For a one-person operation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Simple daily admin</span>
+          <h2 id="features-title">Track the work that turns into cash.</h2>
+          <p>JobDue keeps the daily admin loop simple: what job is open, who still owes money, who needs follow-up, and what should happen next.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="kicker">Jobs</span>
+            <h3>Keep every job visible.</h3>
+            <p>Track client, job type, amount, status, next action, and follow-up date without rebuilding another spreadsheet.</p>
+          </article>
+          <article class="feature-card">
+            <span class="kicker">Money</span>
+            <h3>Find unpaid work faster.</h3>
+            <p>Spot overdue and unpaid jobs before they get buried under the next estimate, call, or job site visit.</p>
+          </article>
+          <article class="feature-card">
+            <span class="kicker">Follow-up</span>
+            <h3>Know today's next action.</h3>
+            <p>Open the Today view and see who needs a call, estimate follow-up, invoice reminder, or review request.</p>
+          </article>
+          <article class="feature-card">
+            <span class="kicker">Backup</span>
+            <h3>Keep a portable backup.</h3>
+            <p>Export a backup file when records change, then import it if you switch browsers or devices.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-blue" id="how-it-works" aria-labelledby="workflow-title">
+      <div class="container workflow">
+        <div class="section-head">
+          <span class="eyebrow">How it works</span>
+          <h2 id="workflow-title">A simple daily workflow before the next job takes over.</h2>
+          <p>Add the job, check what needs attention, update the record, and back up your data when important records change.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <span class="step-number">1</span>
+            <div>
+              <h3>Add the job.</h3>
+              <p>Enter the client, job amount, status, next action, and follow-up date.</p>
+            </div>
+          </article>
+          <article class="step">
+            <span class="step-number">2</span>
+            <div>
+              <h3>Check Today.</h3>
+              <p>See unpaid balances, follow-ups, and work that needs attention before the day fills up.</p>
+            </div>
+          </article>
+          <article class="step">
+            <span class="step-number">3</span>
+            <div>
+              <h3>Follow up and update.</h3>
+              <p>Record payment status, update the next action, and export a backup when records change.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="screenshots" aria-labelledby="product-title">
+      <div class="container product-showcase">
+        <div class="showcase-intro">
+          <span class="eyebrow">Product tour</span>
+          <h2 id="product-title">Open the tab you want to inspect.</h2>
+          <p>A larger visual first. Choose a tab below to preview the matching JobDue screen.</p>
+        </div>
+        <figure class="showcase-panel">
+          <img id="showcase-main-image" src="assets/Image-today.webp" alt="JobDue Today tab showing money to collect, follow-ups, review requests, and unpaid balance" width="1448" height="1086" loading="lazy" decoding="async">
+        </figure>
+        <div class="showcase-controls">
+          <ul class="showcase-list" aria-label="Product screenshot selector">
+            <li>
+              <button class="showcase-button" type="button" aria-selected="true" data-image="assets/Image-today.webp" data-alt="JobDue Today tab showing money to collect, follow-ups, review requests, and unpaid balance">
+                <span class="showcase-thumb">
+                  <img src="assets/Image-today.webp" alt="JobDue Today dashboard screenshot thumbnail" width="1448" height="1086" loading="lazy" decoding="async">
+                </span>
+                <span><b>Today dashboard</b><span>Money to collect, follow-ups due, unpaid balance, and next actions.</span></span>
+              </button>
+            </li>
+            <li>
+              <button class="showcase-button" type="button" aria-selected="false" data-image="assets/jobdue-jobs-tab.jpg" data-alt="JobDue Jobs tab showing client status, next action, due dates, and balance">
+                <span class="showcase-thumb">
+                  <img src="assets/jobdue-jobs-tab.jpg" alt="JobDue Jobs tab screenshot thumbnail" width="1448" height="1086" loading="lazy" decoding="async">
+                </span>
+                <span><b>Jobs tracker</b><span>Client, job status, next action, follow-up date, and balance.</span></span>
+              </button>
+            </li>
+            <li>
+              <button class="showcase-button" type="button" aria-selected="false" data-image="assets/jobdue-money-tab.jpg" data-alt="JobDue Money tab showing overdue, unpaid, and paid balances">
+                <span class="showcase-thumb">
+                  <img src="assets/jobdue-money-tab.jpg" alt="JobDue Money tab screenshot thumbnail" width="1448" height="1086" loading="lazy" decoding="async">
+                </span>
+                <span><b>Money view</b><span>Overdue, unpaid, and paid work separated for quick review.</span></span>
+              </button>
+            </li>
+            <li>
+              <button class="showcase-button" type="button" aria-selected="false" data-image="assets/jobdue-data-tab.jpg" data-alt="JobDue Data tab showing export backup, import backup, CSV export, and local data controls">
+                <span class="showcase-thumb">
+                  <img src="assets/jobdue-data-tab.jpg" alt="JobDue Data tab screenshot thumbnail" width="1448" height="1086" loading="lazy" decoding="async">
+                </span>
+                <span><b>Data and backup</b><span>Export backup, import backup, and local data reminders.</span></span>
+              </button>
+            </li>
+          </ul>
+          <p class="showcase-note">Click a screenshot to change the large preview.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#pricing">See pricing</a>
+            <a class="button button-secondary" href="infographics.html">View product guide</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="video" aria-labelledby="video-title">
+      <div class="container video-feature">
+        <div class="video-frame">
+          <video controls preload="metadata" poster="assets/jobdue-guide-cover.webp">
+            <source src="assets/JobDueFinalLaunchVideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div>
+          <span class="eyebrow">Product intro video</span>
+          <h2 id="video-title">Watch how JobDue works in practice.</h2>
+          <p>See how job records, unpaid balances, follow-ups, and next actions stay visible in the tracker.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#pricing">See pricing</a>
+            <a class="button button-secondary" href="#setup-videos">Setup videos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-blue" id="setup-videos" aria-labelledby="setup-title">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Mobile setup guidance</span>
+          <h2 id="setup-title">Use JobDue from a phone or tablet browser.</h2>
+          <p>Includes iPhone, iPad, and Android browser setup videos. Not an App Store or Play Store app.</p>
+        </div>
+        <div class="setup-grid">
+          <article class="video-card">
+            <video controls preload="metadata" poster="assets/iphone-ipad-setup-poster.png">
+              <source src="assets/iPhone-iPad-Setup-Video.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h3>iPhone and iPad setup</h3>
+            <p>Open the install link in Safari and save JobDue for quick access.</p>
+          </article>
+          <article class="video-card">
+            <video controls preload="metadata" poster="assets/android-setup-poster.png">
+              <source src="assets/Android-Setup-Video.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h3>Android setup</h3>
+            <p>Open the install link in Chrome and keep JobDue on your home screen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="trust" aria-labelledby="trust-title">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Trust and backup</span>
+          <h2 id="trust-title">Simple to start. Honest about where your records live.</h2>
+          <p>Records stay in your browser. Export a backup to protect or move them.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="kicker">Access</span>
+            <h3>No account required.</h3>
+            <p>Open the tracker in a modern browser and start with sample jobs or your own records.</p>
+          </article>
+          <article class="feature-card">
+            <span class="kicker">Cost</span>
+            <h3>No monthly subscription.</h3>
+            <p>JobDue is a one-time digital product for solo operators who do not need full contractor software.</p>
+          </article>
+          <article class="feature-card">
+            <span class="kicker">Data</span>
+            <h3>No automatic cloud sync.</h3>
+            <p>Records stay in the browser/device you use unless you export and import a backup.</p>
+          </article>
+          <article class="feature-card">
+            <span class="kicker">Backup</span>
+            <h3>Backup and import are under your control.</h3>
+            <p>Use Export Backup when important records change and keep the file somewhere safe.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-blue" id="about" aria-labelledby="about-contact-title">
+      <div class="container about-contact">
+        <div class="about-panel">
+          <span class="eyebrow">About JobDue</span>
+          <h2 id="about-contact-title">Built for solo contractors who need the day under control.</h2>
+          <p>JobDue is a focused browser app for tracking jobs, balances, follow-ups, and backups. It keeps daily admin visible without asking you to adopt full contractor software.</p>
+        </div>
+        <div class="contact-panel">
+          <span class="eyebrow">Contact</span>
+          <h3>Questions before you buy?</h3>
+          <p>Ask about setup, backups, or whether JobDue fits your workflow.</p>
+          <div class="contact-options" aria-label="Contact options">
+            <div class="contact-option">
+              <strong>Email</strong>
+              <a href="mailto:hi.craniai@gmail.com">hi.craniai@gmail.com</a>
+            </div>
+            <div class="contact-option">
+              <strong>Purchase support</strong>
+              <a href="https://gumroad.com/l/jobdue-launch-placeholder">Open Gumroad</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing" aria-labelledby="pricing-title">
+      <div class="container pricing">
+        <div>
+          <span class="eyebrow">One-time purchase</span>
+          <h2 id="pricing-title">Early-bird 50% off: start tracking for $14.99.</h2>
+          <p>Buy once. Download the tracker, setup videos, and backup guides.</p>
+          <ul class="included">
+            <li>JobDue tracker</li>
+            <li>Product walkthrough</li>
+            <li>iPhone/iPad setup video</li>
+            <li>Android setup video</li>
+            <li>Backup/restore guide</li>
+            <li>Troubleshooting guide</li>
+            <li>Sample data</li>
+            <li>Phone/tablet instructions</li>
+          </ul>
+        </div>
+        <aside class="price-card" aria-label="JobDue pricing">
+          <span class="discount-pill">Early bird: 50% off for first 20 customers</span>
+          <h3>JobDue launch offer</h3>
+          <div class="regular-price">$29.99 regular listing price</div>
+          <div class="price">$14<small>.99</small></div>
+          <div class="price-promo">Through the Gumroad promotion link.</div>
+          <p>Includes the app, setup videos, backup guide, and support docs.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://gumroad.com/l/jobdue-launch-placeholder">Get JobDue</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-blue" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Buyer questions</span>
+          <h2 id="faq-title">Know exactly what you are buying.</h2>
+        </div>
+        <div class="faq-grid">
+          <article class="faq-item">
+            <h3>Is this cloud software?</h3>
+            <p>No. JobDue does not use an account or cloud database. Your records are saved in the browser/device where you use the app.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Will my phone and computer sync automatically?</h3>
+            <p>No. Records do not automatically sync between devices or browsers. To move records, export a backup and import it on the other device or browser.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Is this an App Store or Play Store app?</h3>
+            <p>No. JobDue is a browser-based tracker. The buyer package includes setup videos for opening and saving it on iPhone, iPad, and Android browsers.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Does JobDue send invoices or collect payments?</h3>
+            <p>No. JobDue tracks invoice/payment status and follow-up needs. It does not send invoices, process payments, or connect to accounting software.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Does it replace accounting software?</h3>
+            <p>No. JobDue is for job tracking, payment status, and follow-up visibility. Accounting and tax records should stay in your accounting system.</p>
+          </article>
+          <article class="faq-item">
+            <h3>How do I protect my data?</h3>
+            <p>Use Export Backup regularly and keep the file somewhere safe. Import Backup can restore or move your records.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Who is JobDue best for?</h3>
+            <p>JobDue is best for solo handymen, cleaners, landscapers, painters, and home-service pros who want a simple tracker without full contractor software.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Who is it not for?</h3>
+            <p>It is not for dispatch teams, multi-user crews, businesses that need GPS routing, QuickBooks integration, automatic SMS, invoice sending, or online payment processing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="final-title">
+      <div class="container">
+        <span class="eyebrow">Ready for the next job</span>
+        <h2 id="final-title">Start with the jobs already in your head.</h2>
+        <p>Use JobDue to see who needs payment, who needs follow-up, and what to handle next.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://gumroad.com/l/jobdue-launch-placeholder">Get JobDue</a>
+          <a class="button button-secondary" href="#video">Watch demo first</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; 2026 JobDue. No login. No subscription. Data stays in the browser/device you use.</span>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#video">Demo</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="infographics.html">Product Guide</a>
+        <a href="#about">About</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var showcaseImage = document.getElementById("showcase-main-image");
+      var showcaseButtons = Array.prototype.slice.call(document.querySelectorAll(".showcase-button"));
+
+      if (!showcaseImage || !showcaseButtons.length) {
+        return;
+      }
+
+      showcaseButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          var nextImage = button.getAttribute("data-image");
+          var nextAlt = button.getAttribute("data-alt");
+
+          if (!nextImage) {
+            return;
+          }
+
+          showcaseImage.src = nextImage;
+          showcaseImage.alt = nextAlt || "";
+
+          showcaseButtons.forEach(function (item) {
+            item.setAttribute("aria-selected", item === button ? "true" : "false");
+          });
+        });
+      });
+    }());
+  </script>
+</body>
+</html>

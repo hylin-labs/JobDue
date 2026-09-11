@@ -1,0 +1,8 @@
+JobDue phone/tablet install link:
+https://app.hi-craniai.workers.dev
+
+Open this link in Safari on iPhone/iPad or Chrome on Android.
+
+Important:
+Data is saved in that browser/device. This link does not create cloud sync.
+Use Export Backup and Import Backup to move data between devices.

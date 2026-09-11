@@ -1,0 +1,8 @@
+# Local and generated files
+__pycache__/
+*.pyc
+07-release-checks/browser-capture/
+07-release-checks/video-frames/
+node_modules/
+dist/
+build/

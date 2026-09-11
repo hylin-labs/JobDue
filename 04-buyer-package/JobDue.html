@@ -1,0 +1,4152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JobDue</title>
+  <meta name="theme-color" content="#145f7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="JobDue">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/jobdue-icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/jobdue-apple-touch-icon.png">
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #eef3f5;
+      --surface: #ffffff;
+      --surface-soft: #fafcfd;
+      --ink: #111315;
+      --muted: #4f5b63;
+      --line: #b9c4cc;
+      --accent: #145f7c;
+      --accent-strong: #0d465d;
+      --accent-soft: #e7f3f6;
+      --accent-line: #8fbfcd;
+      --proof: #174b5b;
+      --proof-soft: #e8f4f6;
+      --proof-line: #8fbfcd;
+      --success: #176c32;
+      --success-soft: #e7f6ec;
+      --warning: #5b3e1e;
+      --warning-soft: #ffffff;
+      --warning-line: #b7792d;
+      --danger: #b00012;
+      --danger-soft: #ffe8eb;
+      --info: #1f6387;
+      --info-soft: #e8f2fb;
+      --radius: 8px;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-7: 28px;
+      --space-8: 32px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { min-height: 100%; }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 16px;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid var(--accent-line);
+      outline-offset: 2px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .app-shell {
+      display: grid;
+      grid-template-columns: 296px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: var(--space-5);
+      border-right: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: var(--space-7);
+      padding-bottom: var(--space-5);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-mark {
+      flex: 0 0 62px;
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid var(--accent-line);
+      border-radius: 14px;
+      background: var(--surface);
+      box-shadow: 0 10px 18px rgba(13, 70, 93, 0.16);
+    }
+
+    .brand-mark img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-copy {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+    }
+
+    .brand-title {
+      margin: 0;
+      color: var(--accent-strong);
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .brand-subtitle {
+      margin: 0;
+      color: #304149;
+      font-size: 16px;
+      font-weight: 760;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: grid;
+      gap: var(--space-2);
+      padding-top: var(--space-2);
+    }
+
+    .nav button,
+    .bottom-nav button {
+      min-height: 44px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      background: transparent;
+      color: var(--muted);
+      font-weight: 750;
+      text-align: left;
+    }
+
+    .nav button {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      min-height: 56px;
+      padding: 8px 12px;
+    }
+
+    .tab-icon {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      color: currentColor;
+    }
+
+    .tab-icon img {
+      display: block;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 1px 3px rgba(17, 19, 21, 0.08);
+    }
+
+    .tab-label {
+      min-width: 0;
+    }
+
+    .nav button.active,
+    .bottom-nav button.active {
+      border-color: var(--accent-line);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+    }
+
+    .main {
+      min-width: 0;
+      padding: var(--space-8);
+    }
+
+    .content-wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-5);
+    }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.1;
+    }
+
+    .topbar p {
+      margin-bottom: 0;
+      max-width: 680px;
+    }
+
+    .top-title {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      min-width: 0;
+    }
+
+    .help-wrap {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+    }
+
+    .help-tip {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      min-height: 28px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1;
+    }
+
+    .help-tip:hover {
+      border-color: var(--accent-line);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+    }
+
+    .help-tip[aria-expanded="true"] {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+    }
+
+    .help-popover {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      z-index: 10;
+      width: min(300px, calc(100vw - 40px));
+      padding: var(--space-3);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: 0 12px 28px rgba(17, 19, 21, .14);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .help-popover[hidden] {
+      display: none;
+    }
+
+    .top-actions {
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: flex-end;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .top-date {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .btn {
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: var(--accent-strong);
+      border-color: var(--accent-strong);
+    }
+
+    .btn.secondary {
+      border-color: var(--line);
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .btn.secondary:hover {
+      border-color: var(--accent-line);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+    }
+
+    .btn.danger {
+      border-color: var(--danger);
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .btn.ghost {
+      border-color: transparent;
+      background: transparent;
+      color: var(--accent-strong);
+    }
+
+    .panel,
+    .card,
+    .metric,
+    .job-card,
+    .action-item,
+    .modal-card,
+    .notice,
+    .route-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .panel {
+      padding: var(--space-4);
+    }
+
+    .panel + .panel,
+    .section + .section {
+      margin-top: var(--space-5);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-3);
+      margin-bottom: var(--space-3);
+    }
+
+    .section-head h2 {
+      margin-bottom: var(--space-1);
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .section-head p {
+      margin-bottom: 0;
+      font-size: 15px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .metric-grid.compact {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .metric-grid.jobs-route-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .panel > .metric-grid:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-3);
+    }
+
+    .summary-card {
+      min-width: 0;
+      padding: var(--space-4);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+    }
+
+    button.summary-card {
+      width: 100%;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    button.summary-card:hover {
+      background: var(--surface);
+    }
+
+    button.summary-card:focus-visible {
+      outline: 3px solid rgba(20, 95, 120, 0.22);
+      outline-offset: 2px;
+    }
+
+    .summary-card strong {
+      display: block;
+      margin-bottom: var(--space-1);
+      color: var(--ink);
+      font-size: 24px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .summary-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .metric {
+      min-width: 0;
+      padding: var(--space-4);
+      border-left: 4px solid var(--accent-line);
+    }
+
+    button.metric {
+      width: 100%;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    button.metric:hover {
+      background: var(--surface-soft);
+    }
+
+    button.metric:focus-visible {
+      outline: 3px solid rgba(20, 95, 120, 0.22);
+      outline-offset: 2px;
+    }
+
+    .metric.active {
+      box-shadow: inset 0 0 0 2px var(--accent-line);
+    }
+
+    .metric.active .metric-label {
+      color: var(--accent-strong);
+    }
+
+    .metric-grid .route-filter-card {
+      position: relative;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .metric-grid .route-filter-card.active {
+      border: 2px solid var(--accent);
+      border-left-width: 6px;
+      background: var(--accent-soft);
+      box-shadow: 0 0 0 3px rgba(20, 95, 120, 0.12);
+    }
+
+    .metric-grid .route-filter-card.active.danger,
+    .metric-grid .route-filter-card.active.warn {
+      border-left-color: var(--accent);
+    }
+
+    .route-selected-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1;
+    }
+
+    .metric.action {
+      display: grid;
+      align-content: start;
+    }
+
+    .metric-action-btn {
+      justify-self: start;
+      min-height: 32px;
+      margin-top: var(--space-2);
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+
+    .metric.money {
+      border-left-color: var(--accent);
+      background: var(--proof-soft);
+    }
+
+    .metric.warn {
+      border-left-color: var(--warning-line);
+    }
+
+    .metric.danger {
+      border-left-color: var(--danger);
+      background: var(--danger-soft);
+    }
+
+    .metric.success {
+      border-left-color: var(--success);
+      background: var(--success-soft);
+    }
+
+    .metric-label {
+      display: block;
+      margin-bottom: var(--space-2);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .metric-value {
+      display: block;
+      color: var(--ink);
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-note {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .notice {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+      padding: var(--space-4);
+      border-left: 4px solid var(--accent);
+    }
+
+    .notice.warning {
+      border-left-color: var(--warning-line);
+      background: var(--warning-soft);
+    }
+
+    .notice.danger {
+      border-left-color: var(--danger);
+      background: var(--danger-soft);
+    }
+
+    .notice h2,
+    .notice h3 {
+      margin-bottom: var(--space-1);
+      font-size: 18px;
+    }
+
+    .notice p {
+      margin-bottom: 0;
+    }
+
+    .notice-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: var(--space-2);
+    }
+
+    .ledger {
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .action-item,
+    .route-card,
+    .job-card {
+      padding: var(--space-3);
+    }
+
+    .action-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr) auto;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    .action-main strong,
+    .job-title strong,
+    .route-card strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .action-main span,
+    .job-title span,
+    .route-card span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .action-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    .payment-meta {
+      display: grid;
+      justify-items: center;
+      gap: 4px;
+      text-align: center;
+    }
+
+    .payment-meta .badge {
+      justify-content: center;
+      min-width: 140px;
+    }
+
+    .payment-meta small {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.2;
+    }
+
+    .money-row {
+      grid-template-columns: minmax(0, 1.35fr) minmax(180px, .9fr) minmax(130px, auto);
+    }
+
+    .money-row > .cell-main {
+      justify-items: start;
+      text-align: left;
+    }
+
+    .money-row > .cell-main:last-child {
+      justify-items: end;
+      text-align: right;
+      min-width: 130px;
+    }
+
+    .today-action {
+      grid-template-columns: minmax(180px, 1.05fr) minmax(260px, 1.15fr) minmax(220px, 1.2fr);
+    }
+
+    .today-action > * {
+      min-width: 0;
+    }
+
+    .today-action .action-meta {
+      display: grid;
+      grid-template-columns: 88px 150px minmax(110px, 1fr);
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    .today-action .action-meta .badge,
+    .today-action .action-meta .amount {
+      justify-self: start;
+    }
+
+    .amount {
+      color: var(--ink);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      max-width: 100%;
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .badge.accent {
+      border-color: var(--accent-line);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+    }
+
+    .badge.success {
+      border-color: #9fd4ad;
+      background: var(--success-soft);
+      color: var(--success);
+    }
+
+    .badge.warn {
+      border-color: var(--warning-line);
+      background: #fff;
+      color: var(--warning);
+    }
+
+    .badge.danger {
+      border-color: #f1a3aa;
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(180px, 1.4fr) minmax(140px, .8fr) minmax(140px, .8fr) minmax(140px, .8fr) minmax(140px, .8fr);
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .field label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .field.required {
+      padding: 8px;
+      border: 1px solid var(--accent-line);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      background: #f6fbfc;
+    }
+
+    .field.required label {
+      color: var(--ink);
+      font-weight: 850;
+    }
+
+    .required-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 20px;
+      padding: 2px 7px;
+      border: 1px solid var(--accent-line);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .field input[type="checkbox"] {
+      width: 22px;
+      min-height: 22px;
+      height: 22px;
+      margin: 8px 0;
+      accent-color: var(--accent);
+    }
+
+    .field textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius);
+      background: transparent;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 820px;
+    }
+
+    .job-table {
+      min-width: 980px;
+      border-collapse: separate;
+      border-spacing: 0 var(--space-2);
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tbody tr:hover {
+      background: var(--surface-soft);
+    }
+
+    .job-table th {
+      padding: 0 12px 4px;
+      border-bottom: 0;
+      color: #42515a;
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+
+    .job-table td {
+      padding: 12px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      vertical-align: middle;
+    }
+
+    .job-table td:first-child {
+      border-left: 1px solid var(--line);
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+
+    .job-table td:last-child {
+      border-right: 1px solid var(--line);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .job-table tbody tr:hover td {
+      background: var(--surface-soft);
+    }
+
+    .job-table .cell-main {
+      gap: 4px;
+    }
+
+    .job-table .cell-main strong {
+      font-size: 16px;
+      font-weight: 760;
+      line-height: 1.25;
+    }
+
+    .job-table .cell-main span {
+      color: #52616b;
+      font-size: 13px;
+    }
+
+    .job-table td:nth-child(4) .cell-main strong {
+      font-weight: 720;
+    }
+
+    .job-table .status-pill {
+      min-width: 126px;
+      gap: 4px;
+    }
+
+    .job-table .status-track {
+      height: 7px;
+      gap: 4px;
+    }
+
+    .job-table .status-pill span:last-child {
+      font-size: 12px;
+    }
+
+    .job-table .badge {
+      min-height: 28px;
+      padding: 5px 9px;
+      font-size: 12px;
+    }
+
+    .job-table .btn {
+      min-height: 38px;
+      padding: 8px 12px;
+    }
+
+    th:nth-child(5),
+    td:nth-child(5),
+    th:nth-child(6),
+    td:nth-child(6) {
+      width: 112px;
+    }
+
+    td:nth-child(5) .cell-main strong,
+    td:nth-child(6) .cell-main strong {
+      white-space: nowrap;
+    }
+
+    .cell-main {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .action-due {
+      justify-items: end;
+      text-align: right;
+    }
+
+    .cell-main strong {
+      color: var(--ink);
+    }
+
+    .cell-main span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-3);
+    }
+
+    .queue-filter {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: var(--space-3);
+      align-items: center;
+      margin-bottom: var(--space-3);
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+    }
+
+    .queue-filter-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .queue-filter .route-grid {
+      gap: var(--space-2);
+    }
+
+    .route-card {
+      width: 100%;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      border-left: 4px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      min-height: 96px;
+    }
+
+    .route-card:hover {
+      background: var(--surface-soft);
+    }
+
+    .route-card:focus-visible {
+      outline: 3px solid rgba(20, 95, 120, 0.22);
+      outline-offset: 2px;
+    }
+
+    .route-card.active {
+      background: var(--accent-soft);
+      box-shadow: inset 0 0 0 1px var(--accent-line);
+    }
+
+    .route-card > .badge:first-child {
+      min-height: 34px;
+      padding: 7px 11px;
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .route-card.warn {
+      border-left-color: var(--warning-line);
+    }
+
+    .route-card.danger {
+      border-left-color: var(--danger);
+    }
+
+    .route-card .route-count {
+      display: block;
+      color: var(--ink);
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .route-total {
+      display: grid;
+      justify-items: end;
+      gap: 3px;
+      text-align: right;
+    }
+
+    .route-card .route-unit {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .queue-filter .route-card {
+      min-height: 48px;
+      padding: 8px 10px;
+      background: var(--surface);
+    }
+
+    .queue-filter .route-card > .badge:first-child {
+      min-height: 28px;
+      padding: 5px 8px;
+      font-size: 13px;
+    }
+
+    .queue-filter .route-card .route-count {
+      font-size: 22px;
+    }
+
+    .queue-filter .route-card .route-unit {
+      font-size: 12px;
+    }
+
+    .status-pill {
+      display: inline-grid;
+      min-width: 138px;
+      gap: 5px;
+    }
+
+    .status-track {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 3px;
+      width: 100%;
+      height: 8px;
+    }
+
+    .status-dot {
+      border-radius: 999px;
+      background: #d7e2e6;
+    }
+
+    .status-dot.filled.level-1 {
+      background: #a9ced9;
+    }
+
+    .status-dot.filled.level-2 {
+      background: #78b3c4;
+    }
+
+    .status-dot.filled.level-3 {
+      background: #438da3;
+    }
+
+    .status-dot.filled.level-4 {
+      background: #1d6f89;
+    }
+
+    .status-dot.filled.level-5 {
+      background: #0f5268;
+    }
+
+    .status-pill.lost .status-dot.filled {
+      background: var(--muted);
+    }
+
+    .status-pill span:last-child {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .job-list {
+      display: none;
+      gap: var(--space-2);
+    }
+
+    .job-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-3);
+    }
+
+    .job-card-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-2);
+    }
+
+    .money-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      align-items: stretch;
+    }
+
+    .data-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, .85fr);
+      gap: var(--space-4);
+      align-items: stretch;
+    }
+
+    .money-layout > .panel,
+    .data-layout > .panel {
+      height: 100%;
+      margin-top: 0;
+    }
+
+    .money-controls {
+      display: grid;
+      grid-template-columns: minmax(180px, 1.3fr) minmax(140px, .75fr) minmax(140px, .75fr) minmax(150px, .85fr);
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+
+    .data-actions {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .data-status {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(220px, .75fr);
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .data-status-card {
+      padding: var(--space-4);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .data-status-card.warn {
+      border-left-color: var(--warning-line);
+      background: var(--warning-soft);
+    }
+
+    .data-status-card.success {
+      border-left-color: var(--success);
+      background: var(--success-soft);
+    }
+
+    .data-status-card .metric-label {
+      font-size: 14px;
+    }
+
+    .data-status-card .metric-value {
+      font-size: 40px;
+    }
+
+    .data-status-card.primary .metric-value {
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.05;
+    }
+
+    .data-recommendation {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-4);
+      align-items: center;
+      margin-bottom: var(--space-4);
+      padding: var(--space-4);
+      border: 1px solid var(--warning-line);
+      border-left: 5px solid var(--warning-line);
+      border-radius: var(--radius);
+      background: #fff8ea;
+    }
+
+    .data-recommendation h2 {
+      margin-bottom: var(--space-1);
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .data-recommendation p {
+      margin-bottom: 0;
+    }
+
+    .data-top-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(340px, 1.15fr);
+      gap: var(--space-3);
+      align-items: stretch;
+      margin-bottom: var(--space-4);
+    }
+
+    .data-top-row > * {
+      height: 100%;
+      margin-bottom: 0;
+    }
+
+    .data-top-row .data-primary {
+      margin-bottom: 0;
+    }
+
+    .data-top-row .data-primary.backup-hero {
+      grid-template-columns: 1fr;
+      align-content: start;
+    }
+
+    .data-top-row .data-primary .notice-actions {
+      justify-content: flex-start;
+    }
+
+    .data-primary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-4);
+      align-items: center;
+      margin-bottom: var(--space-4);
+      padding: var(--space-4);
+      border: 1px solid var(--accent);
+      border-left: 5px solid var(--accent);
+      border-radius: var(--radius);
+      background: var(--accent-soft);
+    }
+
+    .data-primary.backup-hero {
+      grid-template-columns: minmax(0, 1fr) minmax(180px, auto);
+      background: var(--warning-soft);
+      border-color: var(--warning-line);
+      border-left-color: var(--warning-line);
+    }
+
+    .data-primary h3 {
+      margin-bottom: var(--space-1);
+      font-size: 20px;
+    }
+
+    .data-primary p {
+      margin-bottom: 0;
+    }
+
+    .data-primary .metric-note {
+      margin-top: var(--space-3);
+    }
+
+    .data-tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-3);
+      align-items: stretch;
+      margin-bottom: var(--space-4);
+    }
+
+    .data-secondary-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-3);
+      align-items: stretch;
+    }
+
+    .data-secondary-grid > * {
+      height: 100%;
+    }
+
+    .data-danger-zone {
+      padding: var(--space-4);
+      border: 1px dashed #e6a2aa;
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .data-danger-zone h3 {
+      margin-bottom: var(--space-1);
+      font-size: 18px;
+    }
+
+    .data-danger-zone p {
+      margin-bottom: var(--space-3);
+    }
+
+    .data-danger-zone .danger-note {
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .data-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+
+    .data-action {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      align-content: start;
+      padding: var(--space-4);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .data-action.data-danger-zone {
+      border-color: #e6a2aa;
+      border-left-color: var(--danger);
+    }
+
+    .btn.danger-outline {
+      border-color: var(--danger);
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .btn.danger-outline:hover {
+      background: var(--danger-soft);
+    }
+
+    .data-action h3 {
+      margin-bottom: var(--space-1);
+      font-size: 18px;
+    }
+
+    .data-action p {
+      margin-bottom: var(--space-3);
+      font-size: 15px;
+    }
+
+    .data-action .btn {
+      justify-self: start;
+      align-self: end;
+    }
+
+    .data-action .notice-actions {
+      align-self: end;
+      justify-content: flex-start;
+    }
+
+    .data-tools-grid .data-action:not(.install) {
+      min-height: 164px;
+    }
+
+    .data-action.install {
+      border-left-color: var(--success);
+      background: var(--success-soft);
+    }
+
+    .data-action.transfer {
+      border-color: #a9cbe1;
+      border-left-color: var(--info);
+      background: var(--info-soft);
+    }
+
+    .data-action.transfer .install-card {
+      border-color: #a9cbe1;
+    }
+
+    .install-options {
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .install-card {
+      padding: var(--space-3);
+      border: 1px solid #9fd4ad;
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .install-card strong {
+      display: block;
+      margin-bottom: var(--space-1);
+    }
+
+    .data-action ol {
+      margin: var(--space-2) 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .empty {
+      padding: var(--space-5);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+      text-align: center;
+    }
+
+    .empty strong {
+      display: block;
+      margin-bottom: var(--space-1);
+      font-size: 18px;
+    }
+
+    .empty p {
+      margin-bottom: 0;
+    }
+
+    .welcome {
+      margin-bottom: var(--space-5);
+      border-left: 4px solid var(--accent);
+    }
+
+    .welcome-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-4);
+      align-items: center;
+    }
+
+    .welcome h2 {
+      margin-bottom: var(--space-2);
+      font-size: 20px;
+    }
+
+    .welcome ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+      background: rgba(17, 19, 21, .36);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(820px, 100%);
+      max-height: min(92vh, 900px);
+      overflow: auto;
+      max-width: 100%;
+      padding: var(--space-5);
+      box-shadow: 0 18px 42px rgba(17, 19, 21, .18);
+      overscroll-behavior: contain;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .modal-head h2 {
+      margin-bottom: var(--space-1);
+      font-size: 22px;
+    }
+
+    .modal-head p {
+      margin-bottom: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .form-section {
+      display: grid;
+      gap: var(--space-3);
+      padding: var(--space-3);
+      border: 1px solid #d2dde3;
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+    }
+
+    .form-section h3 {
+      margin: 0;
+      color: #35454d;
+      font-size: 14px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .form-section-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-3);
+    }
+
+    .form-section-grid.money {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    details {
+      margin-top: var(--space-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+    }
+
+    summary {
+      min-height: 44px;
+      padding: 12px;
+      color: var(--accent-strong);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-3);
+      padding: 0 var(--space-3) var(--space-3);
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-2);
+      margin-top: var(--space-5);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+    }
+
+    .save-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-left: auto;
+    }
+
+    .hidden-file {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .bottom-nav {
+      display: none;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .num {
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 1023px) {
+      .app-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        padding: var(--space-3) var(--space-4);
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--space-3);
+        margin-bottom: var(--space-3);
+        padding-bottom: var(--space-3);
+      }
+
+      .brand-title {
+        font-size: 26px;
+      }
+
+      .nav {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .nav button {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .main {
+        padding: var(--space-5);
+      }
+
+      .topbar h1 {
+        font-size: 30px;
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .route-grid,
+      .money-layout,
+      .data-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .data-status,
+      .data-tools-grid,
+      .data-secondary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .money-controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .welcome-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .notice {
+        display: grid;
+      }
+
+      .queue-filter {
+        grid-template-columns: 1fr;
+      }
+
+      .notice-actions {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .today-action {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: start;
+      }
+
+      .today-action .action-meta {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .today-action .action-due {
+        justify-items: start;
+        text-align: left;
+      }
+
+      .today-action .action-due strong {
+        overflow-wrap: anywhere;
+      }
+
+      .table-wrap {
+        display: none;
+      }
+
+      .job-list {
+        display: grid;
+      }
+
+      .job-card {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: start;
+      }
+
+      .job-card .btn {
+        min-width: 88px;
+      }
+
+      .controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .data-metric-grid,
+      .data-tools-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .data-recommendation {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: start;
+      }
+
+      .data-recommendation .notice-actions,
+      .data-action .notice-actions {
+        justify-content: flex-start;
+      }
+
+      .data-action {
+        min-width: 0;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        font-size: 17px;
+      }
+
+      .topbar h1 {
+        font-size: 38px;
+      }
+
+      .topbar p {
+        font-size: 17px;
+      }
+
+      .section-head h2 {
+        font-size: 22px;
+      }
+
+      .section-head p,
+      .data-action p {
+        font-size: 16px;
+      }
+
+      .field label,
+      th {
+        font-size: 14px;
+      }
+
+      .badge,
+      .cell-main span,
+      .action-main span,
+      .job-title span,
+      .route-card span {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 719px) {
+      body {
+        padding-bottom: calc(92px + env(safe-area-inset-bottom));
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        padding: var(--space-4) var(--space-4) calc(112px + env(safe-area-inset-bottom));
+      }
+
+      .topbar {
+        display: grid;
+      }
+
+      .topbar h1 {
+        font-size: 28px;
+      }
+
+      .top-actions {
+        grid-template-columns: minmax(0, 1fr) auto;
+        justify-content: stretch;
+      }
+
+      .top-actions .btn {
+        width: 100%;
+      }
+
+      .metric-grid,
+      .metric-grid.compact,
+      .summary-grid,
+      .data-facts,
+      .controls,
+      .money-controls,
+      .form-section-grid,
+      .form-section-grid.money,
+      .metric-grid.jobs-route-grid,
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-value {
+        font-size: 32px;
+      }
+
+      .metric-label {
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: 850;
+        line-height: 1.2;
+      }
+
+      .metric-note {
+        font-size: 15px;
+      }
+
+      .action-item {
+        grid-template-columns: 1fr;
+      }
+
+      .today-action {
+        grid-template-columns: 1fr;
+      }
+
+      .action-due {
+        justify-items: start;
+        text-align: left;
+      }
+
+      .action-meta {
+        align-items: flex-start;
+      }
+
+      .today-action .action-meta {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .table-wrap {
+        display: none;
+      }
+
+      .route-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .job-card {
+        grid-template-columns: 1fr;
+      }
+
+      .job-card .btn {
+        width: 100%;
+      }
+
+      .data-actions {
+        gap: var(--space-2);
+      }
+
+      .data-recommendation,
+      .data-primary,
+      .data-primary.backup-hero,
+      .data-top-row {
+        grid-template-columns: 1fr;
+      }
+
+      .data-recommendation .btn,
+      .data-primary .btn {
+        width: 100%;
+      }
+
+      .data-action {
+        padding: var(--space-3);
+      }
+
+      .data-action h3 {
+        font-size: 17px;
+      }
+
+      .data-action p {
+        margin-bottom: var(--space-2);
+        font-size: 14px;
+      }
+
+      .data-action .btn {
+        width: 100%;
+      }
+
+      .modal-card {
+        width: calc(100vw - 32px);
+        max-height: calc(100vh - 32px);
+        overflow-x: hidden;
+        padding: var(--space-4);
+      }
+
+      .modal-actions {
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+      }
+
+      .save-actions {
+        display: flex;
+        width: 100%;
+      }
+
+      .save-actions {
+        flex: 2 1 0;
+        margin-left: 0;
+      }
+
+      .modal-actions .btn,
+      .save-actions .btn {
+        flex: 1 1 0;
+        min-width: 0;
+        padding-right: 8px;
+        padding-left: 8px;
+        font-size: 13px;
+      }
+
+      .bottom-nav {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 20;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: var(--space-2);
+        padding: 10px 22px calc(10px + env(safe-area-inset-bottom));
+        border-top: 1px solid var(--line);
+        background: #ffffff;
+        box-shadow: 0 -14px 34px rgba(17, 19, 21, .16);
+        isolation: isolate;
+      }
+
+      .bottom-nav button {
+        display: grid;
+        grid-template-rows: 36px auto;
+        justify-items: center;
+        align-content: center;
+        gap: 4px;
+        min-width: 0;
+        min-height: 70px;
+        padding: 6px 4px 8px;
+        text-align: center;
+        font-size: 13px;
+      }
+
+      .bottom-nav .tab-icon,
+      .bottom-nav .tab-icon img {
+        width: 36px;
+        height: 36px;
+      }
+
+      .badge {
+        white-space: normal;
+      }
+
+      .job-list {
+        display: grid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="assets/jobdue-product-mark-128.png" alt="">
+        </div>
+        <div class="brand-copy">
+          <p class="brand-title">JobDue</p>
+          <p class="brand-subtitle">Track jobs. Follow up. Get paid.</p>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary navigation" id="sideNav"></nav>
+    </aside>
+
+    <main class="main">
+      <div class="content-wrap">
+        <div id="app"></div>
+      </div>
+    </main>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Mobile navigation" id="bottomNav"></nav>
+
+  <input class="hidden-file" id="importFile" type="file" accept="application/json,.json">
+
+  <div class="modal-backdrop" id="jobModal" role="dialog" aria-modal="true" aria-labelledby="jobModalTitle">
+    <section class="modal-card">
+      <div class="modal-head">
+        <div>
+          <h2 id="jobModalTitle">Add Job</h2>
+          <p>Track the next action, follow-up, and money in motion.</p>
+        </div>
+        <button class="btn secondary" type="button" data-action="close-job-modal">Close</button>
+      </div>
+      <form id="jobForm">
+        <div class="form-grid" id="jobFormFields"></div>
+        <div class="modal-actions">
+          <button class="btn danger" type="button" id="deleteJobButton">Delete Job</button>
+          <div class="save-actions">
+            <button class="btn secondary" type="button" data-action="close-job-modal">Close</button>
+            <button class="btn" type="submit">Save Job</button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="importModal" role="dialog" aria-modal="true" aria-labelledby="importModalTitle">
+    <section class="modal-card">
+      <div class="modal-head">
+        <div>
+          <h2 id="importModalTitle">Import Backup</h2>
+          <p>Preview the backup before replacing jobs saved in this browser.</p>
+        </div>
+        <button class="btn secondary" type="button" data-action="close-import-modal">Close</button>
+      </div>
+      <div id="importPreview"></div>
+      <div class="modal-actions">
+        <span></span>
+        <div class="save-actions">
+          <button class="btn secondary" type="button" data-action="close-import-modal">Cancel</button>
+          <button class="btn danger" type="button" id="confirmImportButton">Replace Current Jobs</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var STORAGE_KEY = "contractorTracker.v1";
+      var DEMO_STORAGE_KEY = "contractorTracker.demo.v1";
+      var TABS = ["Today", "Jobs", "Money", "Data"];
+      var TAB_ICONS = {
+        Today: "assets/jobdue-tab-today-128.png",
+        Jobs: "assets/jobdue-tab-jobs-128.png",
+        Money: "assets/jobdue-tab-money-128.png",
+        Data: "assets/jobdue-tab-data-128.png"
+      };
+      var DATE_TODAY = new Date();
+      var state = null;
+      var activeTab = "Today";
+      var editingJobId = null;
+      var pendingImport = null;
+      var storageWarning = "";
+      var recoveryMode = false;
+      var rawCorruptedState = "";
+      var filters = {
+        search: "",
+        status: "All",
+        payment: "All",
+        follow: "All",
+        sort: "followUp"
+      };
+      var routeFilter = "All";
+      var moneyFilters = {
+        search: "",
+        view: "Unpaid",
+        payment: "All",
+        sort: "balance"
+      };
+
+      var statuses = [
+        "New Lead",
+        "Waiting on Details",
+        "Estimate Needed",
+        "Estimate Sent",
+        "Follow-Up Needed",
+        "Scheduled",
+        "In Progress",
+        "Completed",
+        "Invoice Sent",
+        "Paid",
+        "Closed/Lost"
+      ];
+
+      var paymentStatuses = [
+        "Invoice Needed",
+        "Invoice Sent",
+        "Partially Paid",
+        "Paid",
+        "Overdue",
+        "No Charge"
+      ];
+
+      var statusNextActions = {
+        "New Lead": "Call new lead",
+        "Waiting on Details": "Ask customer for missing details",
+        "Estimate Needed": "Create estimate",
+        "Estimate Sent": "Follow up on estimate",
+        "Follow-Up Needed": "Follow up with customer",
+        "Scheduled": "Confirm schedule and materials",
+        "In Progress": "Finish current job step",
+        "Completed": "Send final invoice",
+        "Invoice Sent": "Collect payment",
+        "Paid": "Ask for review",
+        "Closed/Lost": "Archive job"
+      };
+
+      var estimateStatuses = [
+        "Not Needed",
+        "Needed",
+        "Sent",
+        "Accepted",
+        "Declined"
+      ];
+
+      var sampleJobs = [
+        {
+          id: "job_sample_001",
+          createdAt: "2026-04-10T09:00:00-07:00",
+          updatedAt: "2026-05-05T09:00:00-07:00",
+          clientName: "Maria Lopez",
+          phone: "555-210-4412",
+          email: "maria@example.com",
+          serviceAddress: "122 Pine Street",
+          trade: "Handyman",
+          jobType: "Drywall patch and paint",
+          leadSource: "Referral",
+          status: "Invoice Sent",
+          nextAction: "Text final payment reminder",
+          nextActionDate: "2026-05-06",
+          jobDate: "2026-04-18",
+          estimateSentDate: "2026-04-11",
+          estimateAmount: 680,
+          estimateStatus: "Accepted",
+          invoiceSentDate: "2026-04-19",
+          invoiceAmount: 680,
+          amountPaid: 200,
+          paymentStatus: "Overdue",
+          paymentMethod: "Zelle",
+          dueDate: "2026-04-28",
+          followUpDate: "2026-05-06",
+          completedDate: "2026-04-18",
+          reviewRequested: false,
+          reviewRequestDate: "",
+          reviewReceived: false,
+          notes: "Customer said the final payment would be ready after the paint dried. Follow up politely and include the balance."
+        },
+        {
+          id: "job_sample_002",
+          createdAt: "2026-04-28T14:00:00-07:00",
+          updatedAt: "2026-05-05T17:00:00-07:00",
+          clientName: "Ava Nguyen",
+          phone: "555-448-0193",
+          email: "ava@example.com",
+          serviceAddress: "912 Hillcrest Ave",
+          trade: "Handyman",
+          jobType: "Bathroom caulk and trim",
+          leadSource: "Neighbor",
+          status: "Estimate Sent",
+          nextAction: "Call to see if estimate was approved",
+          nextActionDate: "2026-05-06",
+          jobDate: "",
+          estimateSentDate: "2026-04-30",
+          estimateAmount: 520,
+          estimateStatus: "Sent",
+          invoiceSentDate: "",
+          invoiceAmount: 0,
+          amountPaid: 0,
+          paymentStatus: "Invoice Needed",
+          paymentMethod: "",
+          dueDate: "",
+          followUpDate: "2026-05-06",
+          completedDate: "",
+          reviewRequested: false,
+          reviewRequestDate: "",
+          reviewReceived: false,
+          notes: "Estimate includes trim repair, tub caulk, and small drywall touch-up near vanity."
+        },
+        {
+          id: "job_sample_003",
+          createdAt: "2026-04-25T07:45:00-07:00",
+          updatedAt: "2026-05-05T08:10:00-07:00",
+          clientName: "Nora Patel",
+          phone: "555-611-4002",
+          email: "nora@example.com",
+          serviceAddress: "18 Cedar Lane",
+          trade: "Electrical",
+          jobType: "Porch light troubleshooting",
+          leadSource: "Repeat customer",
+          status: "In Progress",
+          nextAction: "Pick up outdoor-rated fixture",
+          nextActionDate: "",
+          jobDate: "2026-05-05",
+          estimateSentDate: "2026-04-26",
+          estimateAmount: 260,
+          estimateStatus: "Accepted",
+          invoiceSentDate: "",
+          invoiceAmount: 260,
+          amountPaid: 0,
+          paymentStatus: "Invoice Needed",
+          paymentMethod: "",
+          dueDate: "2026-05-10",
+          followUpDate: "",
+          completedDate: "",
+          reviewRequested: false,
+          reviewRequestDate: "",
+          reviewReceived: false,
+          notes: "Fixture was water damaged. Customer approved replacement up to $90 for parts."
+        },
+        {
+          id: "job_sample_004",
+          createdAt: "2026-05-01T08:00:00-07:00",
+          updatedAt: "2026-05-05T11:00:00-07:00",
+          clientName: "Oak Street Realty",
+          phone: "555-782-9933",
+          email: "ops@oakstreet.example",
+          serviceAddress: "40 Oak Street Unit 3",
+          trade: "Maintenance",
+          jobType: "Rental turnover punch list",
+          leadSource: "Property manager",
+          status: "Scheduled",
+          nextAction: "Confirm door hardware and paint supplies",
+          nextActionDate: "2026-05-12",
+          jobDate: "2026-05-13",
+          estimateSentDate: "2026-05-01",
+          estimateAmount: 1240,
+          estimateStatus: "Accepted",
+          invoiceSentDate: "",
+          invoiceAmount: 1240,
+          amountPaid: 0,
+          paymentStatus: "Invoice Needed",
+          paymentMethod: "",
+          dueDate: "2026-05-20",
+          followUpDate: "2026-05-12",
+          completedDate: "",
+          reviewRequested: false,
+          reviewRequestDate: "",
+          reviewReceived: false,
+          notes: "Upcoming job. Bring lockset, outlet covers, white semi-gloss, caulk, and disposal bags."
+        }
+      ];
+
+      var fields = [
+        ["clientName", "Client name", "text", true],
+        ["phone", "Phone", "text", false],
+        ["email", "Email", "email", false],
+        ["serviceAddress", "Service address", "text", false],
+        ["jobType", "Job type", "text", true],
+        ["status", "Status", "selectStatus", true],
+        ["nextAction", "Next action", "text", false],
+        ["nextActionDate", "Action date", "date", false],
+        ["followUpDate", "Follow-up date", "date", false],
+        ["invoiceAmount", "Invoice amount", "number", false],
+        ["amountPaid", "Amount paid so far", "number", false],
+        ["dueDate", "Pay by date", "date", false],
+        ["notes", "Notes", "textarea", false]
+      ];
+
+      var jobFormSections = [
+        ["Client", ["clientName", "phone", "email", "serviceAddress"]],
+        ["Job", ["jobType", "status"]],
+        ["Next Step", ["nextAction", "nextActionDate", "followUpDate"]],
+        ["Money", ["invoiceAmount", "amountPaid", "dueDate"], "money"],
+        ["Notes", ["notes"]]
+      ];
+
+      var optionalFields = [
+        ["trade", "Trade / service", "text", false],
+        ["leadSource", "Lead source", "text", false],
+        ["jobDate", "Job date", "date", false],
+        ["estimateSentDate", "Estimate sent date", "date", false],
+        ["estimateAmount", "Estimate amount", "number", false],
+        ["estimateStatus", "Estimate status", "selectEstimate", false],
+        ["invoiceSentDate", "Invoice sent date", "date", false],
+        ["paymentStatus", "Payment status", "selectPayment", false],
+        ["paymentMethod", "Payment method or link", "text", false],
+        ["completedDate", "Completed date", "date", false],
+        ["reviewRequested", "Review requested", "checkbox", false],
+        ["reviewRequestDate", "Review request date", "date", false],
+        ["reviewReceived", "Review received", "checkbox", false]
+      ];
+
+      var placeholders = {
+        clientName: "Maria Lopez",
+        phone: "555-210-4412",
+        email: "maria@example.com",
+        serviceAddress: "122 Pine Street",
+        jobType: "Drywall patch and paint",
+        nextAction: "Text final payment reminder",
+        invoiceAmount: "680",
+        amountPaid: "Total received so far",
+        notes: "Add materials, customer preferences, or payment notes.",
+        trade: "Handyman, plumbing, electrical",
+        leadSource: "Referral, Google, repeat customer",
+        estimateAmount: "520",
+        paymentMethod: "Cash, Zelle, check, Venmo"
+      };
+
+      function clone(obj) {
+        return JSON.parse(JSON.stringify(obj));
+      }
+
+      function todayString() {
+        return toDateInput(DATE_TODAY);
+      }
+
+      function toDateInput(date) {
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, "0");
+        var day = String(date.getDate()).padStart(2, "0");
+        return year + "-" + month + "-" + day;
+      }
+
+      function addDaysString(baseValue, days) {
+        var date = parseLocalDate(baseValue || todayString()) || parseLocalDate(todayString());
+        date.setDate(date.getDate() + days);
+        return toDateInput(date);
+      }
+
+      function parseLocalDate(value) {
+        if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+        var parts = value.split("-").map(Number);
+        var date = new Date(parts[0], parts[1] - 1, parts[2]);
+        if (date.getFullYear() !== parts[0] || date.getMonth() !== parts[1] - 1 || date.getDate() !== parts[2]) {
+          return null;
+        }
+        return date;
+      }
+
+      function daysBetween(dateValue, baseValue) {
+        var date = parseLocalDate(dateValue);
+        var base = parseLocalDate(baseValue || todayString());
+        if (!date || !base) return 0;
+        return Math.floor((base.getTime() - date.getTime()) / 86400000);
+      }
+
+      function formatDate(value) {
+        var date = parseLocalDate(value);
+        if (!date) return "Not set";
+        return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+      }
+
+      function formatMoney(value) {
+        var amount = Number(value || 0);
+        return amount.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+      }
+
+      function numberValue(value) {
+        var num = Number(value);
+        return Number.isFinite(num) ? num : 0;
+      }
+
+      function statusNumber(status) {
+        var index = statuses.indexOf(status);
+        return index >= 0 ? index + 1 : 0;
+      }
+
+      function statusLabel(status) {
+        return status || "No status";
+      }
+
+      function nextActionForStatus(status) {
+        return statusNextActions[status] || "Review next step";
+      }
+
+      function statusStage(status) {
+        if (["New Lead", "Waiting on Details"].indexOf(status) >= 0) return 1;
+        if (["Estimate Needed", "Estimate Sent", "Follow-Up Needed"].indexOf(status) >= 0) return 2;
+        if (["Scheduled", "In Progress", "Completed"].indexOf(status) >= 0) return 3;
+        if (status === "Invoice Sent") return 4;
+        if (status === "Paid" || status === "Closed/Lost") return 5;
+        return Math.max(1, Math.min(5, Math.ceil((statusNumber(status) || 1) / statuses.length * 5)));
+      }
+
+      function statusPill(status) {
+        var filled = statusStage(status);
+        var pill = el("span", "status-pill" + (status === "Paid" ? " done" : status === "Closed/Lost" ? " lost" : ""));
+        var track = el("span", "status-track");
+        for (var i = 1; i <= 5; i += 1) {
+          track.appendChild(el("span", "status-dot" + (i <= filled ? " filled level-" + i : "")));
+        }
+        pill.appendChild(track);
+        pill.appendChild(el("span", "", statusLabel(status)));
+        return pill;
+      }
+
+      function createState(jobs, onboarded) {
+        return {
+          version: 1,
+          jobs: jobs || [],
+          meta: {
+            onboarded: !!onboarded,
+            lastBackupExportedAt: "",
+            changesSinceLastBackup: 0,
+            backupReminderDismissedAt: ""
+          }
+        };
+      }
+
+      function isDemoMode() {
+        return new URLSearchParams(window.location.search).get("demo") === "1";
+      }
+
+      function activeStorageKey() {
+        return isDemoMode() ? DEMO_STORAGE_KEY : STORAGE_KEY;
+      }
+
+      function getDefaultState() {
+        if (isDemoMode()) {
+          return createState(getSampleJobs(), true);
+        }
+        return createState([], false);
+      }
+
+      function getSampleJobs() {
+        return clone(sampleJobs);
+      }
+
+      function newId() {
+        if (window.crypto && typeof window.crypto.randomUUID === "function") {
+          return "job_" + window.crypto.randomUUID();
+        }
+        return "job_" + Date.now() + "_" + Math.random().toString(16).slice(2);
+      }
+
+      function loadState() {
+        if (isDemoMode()) {
+          state = getDefaultState();
+          saveState(false);
+          return;
+        }
+        try {
+          var saved = localStorage.getItem(activeStorageKey());
+          if (!saved) {
+            state = getDefaultState();
+            return;
+          }
+          var parsed = JSON.parse(saved);
+          var result = validateState(parsed);
+          if (!result.ok) {
+            recoveryMode = true;
+            rawCorruptedState = saved;
+            state = createState([], false);
+            storageWarning = "Your saved data could not be loaded. Your current file was not changed. You can export the unreadable data for support, import a backup, or reset this browser.";
+            return;
+          }
+          state = normalizeState(parsed);
+        } catch (error) {
+          recoveryMode = true;
+          try {
+            rawCorruptedState = localStorage.getItem(activeStorageKey()) || "";
+          } catch (readError) {
+            rawCorruptedState = "";
+          }
+          state = createState([], false);
+          storageWarning = "Your saved data could not be loaded. Your current file was not changed. You can import a backup or reset this browser.";
+        }
+      }
+
+      function saveState(countChange) {
+        if (!state || recoveryMode) return false;
+        if (countChange) {
+          state.meta.changesSinceLastBackup = numberValue(state.meta.changesSinceLastBackup) + 1;
+        }
+        try {
+          localStorage.setItem(activeStorageKey(), JSON.stringify(state));
+          storageWarning = "";
+          return true;
+        } catch (error) {
+          storageWarning = "This browser is blocking local storage. JobDue may not be able to save changes here. Try a normal Chrome, Edge, or Safari window, then export a backup after adding jobs.";
+          render();
+          return false;
+        }
+      }
+
+      function normalizeState(input) {
+        var clean = createState([], true);
+        clean.version = 1;
+        clean.jobs = input.jobs.map(normalizeJob);
+        clean.meta = Object.assign(clean.meta, input.meta || {});
+        clean.meta.changesSinceLastBackup = numberValue(clean.meta.changesSinceLastBackup);
+        clean.meta.onboarded = clean.jobs.length ? true : !!clean.meta.onboarded;
+        return clean;
+      }
+
+      function normalizeJob(job) {
+        var now = new Date().toISOString();
+        var paymentStatus = normalizePaymentStatus(job.paymentStatus);
+        var clean = {
+          id: String(job.id || newId()),
+          createdAt: String(job.createdAt || now),
+          updatedAt: String(job.updatedAt || now),
+          clientName: String(job.clientName || ""),
+          phone: String(job.phone || ""),
+          email: String(job.email || ""),
+          serviceAddress: String(job.serviceAddress || ""),
+          trade: String(job.trade || ""),
+          jobType: String(job.jobType || ""),
+          leadSource: String(job.leadSource || ""),
+          status: statuses.indexOf(job.status) >= 0 ? job.status : "New Lead",
+          nextAction: String(job.nextAction || ""),
+          nextActionDate: String(job.nextActionDate || ""),
+          jobDate: String(job.jobDate || ""),
+          estimateSentDate: String(job.estimateSentDate || ""),
+          estimateAmount: numberValue(job.estimateAmount),
+          estimateStatus: estimateStatuses.indexOf(job.estimateStatus) >= 0 ? job.estimateStatus : "Not Needed",
+          invoiceSentDate: String(job.invoiceSentDate || ""),
+          invoiceAmount: numberValue(job.invoiceAmount),
+          amountPaid: numberValue(job.amountPaid),
+          paymentStatus: paymentStatus,
+          paymentMethod: String(job.paymentMethod || ""),
+          dueDate: String(job.dueDate || ""),
+          followUpDate: String(job.followUpDate || ""),
+          completedDate: String(job.completedDate || ""),
+          reviewRequested: !!job.reviewRequested,
+          reviewRequestDate: String(job.reviewRequestDate || ""),
+          reviewReceived: !!job.reviewReceived,
+          notes: String(job.notes || "")
+        };
+        return applyPaymentProgressRules(clean);
+      }
+
+      function normalizePaymentStatus(status) {
+        if (status === "Not Sent") return "Invoice Needed";
+        return paymentStatuses.indexOf(status) >= 0 ? status : "Invoice Needed";
+      }
+
+      function isReviewNextAction(text) {
+        return /review/i.test(String(text || ""));
+      }
+
+      function isBeforeInvoiceSent(status) {
+        var invoiceStep = statusNumber("Invoice Sent");
+        var currentStep = statusNumber(status);
+        return currentStep > 0 && currentStep < invoiceStep;
+      }
+
+      function applyPaymentProgressRules(job) {
+        var invoiceAmount = numberValue(job.invoiceAmount);
+        var amountPaid = numberValue(job.amountPaid);
+        var dueAmount = Math.max(invoiceAmount - amountPaid, 0);
+        var currentPayment = normalizePaymentStatus(job.paymentStatus);
+
+        if (invoiceAmount <= 0) {
+          if (isBeforeInvoiceSent(job.status) && !job.invoiceSentDate && amountPaid <= 0) {
+            job.paymentStatus = "Invoice Needed";
+            return job;
+          }
+          job.paymentStatus = amountPaid > 0 ? "Paid" : currentPayment;
+          return job;
+        }
+
+        if (dueAmount <= 0 && amountPaid > 0) {
+          job.paymentStatus = "Paid";
+          job.status = "Paid";
+          if (!job.completedDate) job.completedDate = todayString();
+          if (!job.reviewReceived) {
+            job.nextAction = job.reviewRequested ? (job.nextAction || "Check for review") : "Ask for review";
+            job.nextActionDate = job.reviewRequested ? (job.nextActionDate || todayString()) : todayString();
+            if (!job.reviewRequested) job.followUpDate = addDaysString(todayString(), 7);
+          }
+          return job;
+        }
+
+        if (amountPaid > 0 && dueAmount > 0) {
+          job.paymentStatus = "Partially Paid";
+          if (job.status === "Paid") job.status = "Invoice Sent";
+          if (!job.nextAction || isReviewNextAction(job.nextAction)) job.nextAction = "Collect remaining balance";
+          if (!job.nextActionDate && job.dueDate) job.nextActionDate = job.dueDate;
+          return job;
+        }
+
+        if (isBeforeInvoiceSent(job.status) && !job.invoiceSentDate) {
+          job.paymentStatus = "Invoice Needed";
+          return job;
+        }
+
+        if (job.dueDate && parseLocalDate(job.dueDate) < parseLocalDate(todayString())) {
+          job.paymentStatus = "Overdue";
+        } else if (currentPayment === "Paid" || currentPayment === "Partially Paid" || currentPayment === "Overdue") {
+          job.paymentStatus = job.invoiceSentDate ? "Invoice Sent" : "Invoice Needed";
+        } else {
+          job.paymentStatus = currentPayment;
+        }
+        return job;
+      }
+
+      function validateState(input) {
+        if (!input || typeof input !== "object") return { ok: false, message: "This backup file could not be read. Your current data was not changed." };
+        if (input.version !== 1) return { ok: false, message: "This backup version is not supported. Your current data was not changed." };
+        if (!Array.isArray(input.jobs)) return { ok: false, message: "This backup does not include a jobs list. Your current data was not changed." };
+        var seen = {};
+        for (var i = 0; i < input.jobs.length; i += 1) {
+          var job = input.jobs[i];
+          if (!job || typeof job !== "object") return { ok: false, message: "This backup includes a job that could not be read. Your current data was not changed." };
+          if (!job.id || seen[job.id]) return { ok: false, message: "This backup has duplicate or missing job IDs. Your current data was not changed." };
+          seen[job.id] = true;
+          if (!job.clientName || !job.jobType || !job.status) return { ok: false, message: "This backup is missing required job fields. Your current data was not changed." };
+          if (statuses.indexOf(job.status) < 0) return { ok: false, message: "This backup includes an unsupported job status. Your current data was not changed." };
+          var dateFields = ["nextActionDate", "jobDate", "estimateSentDate", "invoiceSentDate", "dueDate", "followUpDate", "completedDate", "reviewRequestDate"];
+          for (var d = 0; d < dateFields.length; d += 1) {
+            var val = job[dateFields[d]];
+            if (val && !parseLocalDate(String(val))) {
+              return { ok: false, message: "This backup has an invalid date. Your current data was not changed." };
+            }
+          }
+          var numericFields = ["estimateAmount", "invoiceAmount", "amountPaid"];
+          for (var n = 0; n < numericFields.length; n += 1) {
+            var numericValue = job[numericFields[n]];
+            if (numericValue === undefined || numericValue === null || numericValue === "") continue;
+            var parsedNumber = Number(numericValue);
+            if (!Number.isFinite(parsedNumber) || parsedNumber < 0) {
+              return { ok: false, message: "This backup has an invalid money amount. Your current data was not changed." };
+            }
+          }
+        }
+        return { ok: true, message: "" };
+      }
+
+      function balanceDue(job) {
+        return Math.max(numberValue(job.invoiceAmount) - numberValue(job.amountPaid), 0);
+      }
+
+      function daysOverdue(job) {
+        if (!job.dueDate || balanceDue(job) <= 0) return 0;
+        return Math.max(daysBetween(job.dueDate), 0);
+      }
+
+      function isOverdue(job) {
+        return daysOverdue(job) > 0;
+      }
+
+      function isFollowUpDue(job) {
+        if (!job.followUpDate) return false;
+        return parseLocalDate(job.followUpDate) <= parseLocalDate(todayString());
+      }
+
+      function isDueThisWeek(job) {
+        if (!job.followUpDate) return false;
+        var diff = -daysBetween(job.followUpDate);
+        return diff >= 0 && diff <= 7;
+      }
+
+      function isJobScheduledThisWeek(job) {
+        if (!job.jobDate) return false;
+        var diff = -daysBetween(job.jobDate);
+        return diff >= 0 && diff <= 7;
+      }
+
+      function hasFutureWorkDate(job) {
+        return ["jobDate", "nextActionDate", "followUpDate"].some(function (key) {
+          return job[key] && parseLocalDate(job[key]) > parseLocalDate(todayString());
+        });
+      }
+
+      function needsReview(job) {
+        return job.completedDate && balanceDue(job) === 0 && !job.reviewReceived && (!job.reviewRequested || job.reviewRequestDate);
+      }
+
+      function getMetrics() {
+        var jobs = state.jobs;
+        var paid = jobs.reduce(function (sum, job) { return sum + numberValue(job.amountPaid); }, 0);
+        var unpaid = jobs.reduce(function (sum, job) { return sum + balanceDue(job); }, 0);
+        var overdue = jobs.reduce(function (sum, job) { return sum + (isOverdue(job) ? balanceDue(job) : 0); }, 0);
+        var followUps = jobs.filter(isFollowUpDue).length;
+        var reviewRequests = jobs.filter(function (job) {
+          return job.completedDate && balanceDue(job) === 0 && !job.reviewRequested && !job.reviewReceived;
+        }).length;
+        var invoiceJobs = jobs.filter(function (job) { return numberValue(job.invoiceAmount) > 0 && balanceDue(job) > 0; }).length;
+        var openLeads = jobs.filter(function (job) { return statusNumber(job.status) > 0 && statusNumber(job.status) < 6; }).length;
+        var estimatesSent = jobs.filter(function (job) { return job.status === "Estimate Sent"; }).length;
+        return {
+          paid: paid,
+          unpaid: unpaid,
+          overdue: overdue,
+          followUps: followUps,
+          reviewRequests: reviewRequests,
+          invoiceJobs: invoiceJobs,
+          openLeads: openLeads,
+          estimatesSent: estimatesSent
+        };
+      }
+
+      function setText(el, text) {
+        el.textContent = text == null ? "" : String(text);
+        return el;
+      }
+
+      function el(tag, className, text) {
+        var node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+      }
+
+      function button(label, className, action, value) {
+        var node = el("button", className || "btn", label);
+        node.type = "button";
+        if (action) node.dataset.action = action;
+        if (value) node.dataset.value = value;
+        node.title = tooltipForAction(action, label);
+        node.setAttribute("aria-label", label);
+        return node;
+      }
+
+      function tooltipForAction(action, label) {
+        var tips = {
+          "set-tab": "Open the " + label + " view.",
+          "new-job": "Add a new lead or job.",
+          "export-backup": "Download a backup you can restore or move to another device.",
+          "choose-import": "Choose a backup file and preview it before replacing current jobs.",
+          "export-csv": "Download job data for spreadsheet review.",
+          "dismiss-backup": "Hide this backup reminder until later.",
+          "reload-sample": "Replace current jobs with the smaller sample data set.",
+          "reset-data": "Clear jobs saved in this browser after confirmation.",
+          "edit-job": "Edit this job.",
+          "set-route-filter": "Filter the Jobs list by this work queue.",
+          "show-jobs-preset": "Open Jobs with the matching filter applied.",
+          "set-money-preset": "Filter the Money list by this total.",
+          "use-sample": "Load the sample jobs so you can try the app.",
+          "start-blank": "Start with no jobs saved.",
+          "close-job-modal": "Close this form without saving.",
+          "close-import-modal": "Close this import preview."
+        };
+        return tips[action] || label;
+      }
+
+      function badge(text, tone) {
+        var node = el("span", "badge" + (tone ? " " + tone : ""), text);
+        node.title = text;
+        return node;
+      }
+
+      function renderNav() {
+        var sideNav = document.getElementById("sideNav");
+        var bottomNav = document.getElementById("bottomNav");
+        sideNav.textContent = "";
+        bottomNav.textContent = "";
+        TABS.forEach(function (tab) {
+          var sideButton = button(tab, activeTab === tab ? "active" : "", "set-tab", tab);
+          var bottomButton = button(tab, activeTab === tab ? "active" : "", "set-tab", tab);
+          decorateTabButton(sideButton, tab);
+          decorateTabButton(bottomButton, tab);
+          sideNav.appendChild(sideButton);
+          bottomNav.appendChild(bottomButton);
+        });
+      }
+
+      function decorateTabButton(node, tab) {
+        node.textContent = "";
+        var icon = el("span", "tab-icon");
+        var img = document.createElement("img");
+        img.src = TAB_ICONS[tab] || "";
+        img.alt = "";
+        img.setAttribute("aria-hidden", "true");
+        icon.appendChild(img);
+        node.appendChild(icon);
+        node.appendChild(el("span", "tab-label", tab));
+      }
+
+      function render() {
+        renderNav();
+        var app = document.getElementById("app");
+        app.textContent = "";
+
+        if (recoveryMode) {
+          app.appendChild(renderRecovery());
+          return;
+        }
+
+        if (!state.meta.onboarded) {
+          app.appendChild(renderWelcome());
+        }
+
+        if (storageWarning) {
+          app.appendChild(renderNotice("Storage warning", storageWarning, "danger"));
+        }
+
+        app.appendChild(renderTopbar());
+
+        if (activeTab === "Today") app.appendChild(renderToday());
+        if (activeTab === "Jobs") app.appendChild(renderJobs());
+        if (activeTab === "Money") app.appendChild(renderMoney());
+        if (activeTab === "Data") app.appendChild(renderData());
+      }
+
+      function renderTopbar() {
+        var wrap = el("div", "topbar");
+        var copy = el("div", "top-title");
+        copy.appendChild(el("h1", "", activeTab));
+        var help = "Follow up and collect what is due today.";
+        if (activeTab === "Jobs") help = "Find, filter, and update contractor jobs.";
+        if (activeTab === "Money") help = "Track unpaid, overdue, and paid work.";
+        if (activeTab === "Data") help = "Back up, restore, export, and install.";
+        copy.appendChild(helpTip(help));
+        wrap.appendChild(copy);
+        var actions = el("div", "top-actions");
+        if (activeTab === "Today") {
+          actions.appendChild(el("div", "top-date", formatDate(todayString())));
+          actions.appendChild(button("Add Job", "btn", "new-job"));
+          wrap.appendChild(actions);
+        }
+        if (activeTab === "Jobs") {
+          actions.appendChild(button("Add Job", "btn", "new-job"));
+          wrap.appendChild(actions);
+        }
+        return wrap;
+      }
+
+      function helpTip(text) {
+        var wrap = el("span", "help-wrap");
+        var tip = el("button", "help-tip", "?");
+        var popover = el("span", "help-popover", text);
+        tip.type = "button";
+        tip.setAttribute("aria-label", text);
+        tip.setAttribute("aria-expanded", "false");
+        tip.dataset.action = "toggle-help";
+        popover.hidden = true;
+        wrap.appendChild(tip);
+        wrap.appendChild(popover);
+        return wrap;
+      }
+
+      function renderWelcome() {
+        var panel = el("section", "panel welcome");
+        var grid = el("div", "welcome-grid");
+        var copy = el("div");
+        copy.appendChild(el("h2", "", "Start with sample jobs or your own tracker"));
+        var list = el("ul");
+        [
+          "This is an offline browser app.",
+          "Data is saved in this browser on this device.",
+          "Export Backup saves a portable backup file for recovery or device transfer.",
+          "Clearing browser data can erase saved jobs."
+        ].forEach(function (item) {
+          list.appendChild(el("li", "", item));
+        });
+        copy.appendChild(list);
+        grid.appendChild(copy);
+        var actions = el("div", "notice-actions");
+        actions.appendChild(button("Use Sample Data", "btn", "use-sample"));
+        actions.appendChild(button("Start Blank", "btn secondary", "start-blank"));
+        actions.appendChild(button("Import Backup", "btn secondary", "choose-import"));
+        grid.appendChild(actions);
+        panel.appendChild(grid);
+        return panel;
+      }
+
+      function renderRecovery() {
+        var wrap = el("div");
+        var notice = renderNotice("Saved data needs attention", storageWarning, "danger");
+        var actions = el("div", "notice-actions");
+        actions.appendChild(button("Import Backup", "btn", "choose-import"));
+        actions.appendChild(button("Export Unreadable Data", "btn secondary", "export-raw"));
+        actions.appendChild(button("Reset This Browser", "btn danger", "reset-data"));
+        notice.appendChild(actions);
+        wrap.appendChild(notice);
+        return wrap;
+      }
+
+      function renderNotice(title, message, tone) {
+        var notice = el("section", "notice" + (tone ? " " + tone : ""));
+        var copy = el("div");
+        copy.appendChild(el("h2", "", title));
+        copy.appendChild(el("p", "", message));
+        notice.appendChild(copy);
+        return notice;
+      }
+
+      function shouldShowBackupReminder() {
+        if (!state.meta.onboarded) return false;
+        if (state.meta.backupReminderDismissedAt) {
+          var dismissed = new Date(state.meta.backupReminderDismissedAt);
+          if (!Number.isNaN(dismissed.getTime())) {
+            var dismissedDays = Math.floor((Date.now() - dismissed.getTime()) / 86400000);
+            if (dismissedDays < 1) return false;
+          }
+        }
+        var changes = numberValue(state.meta.changesSinceLastBackup);
+        if (changes >= 25) return true;
+        if (!state.meta.lastBackupExportedAt) return true;
+        var last = new Date(state.meta.lastBackupExportedAt);
+        if (Number.isNaN(last.getTime())) return true;
+        var days = Math.floor((Date.now() - last.getTime()) / 86400000);
+        return days >= 7;
+      }
+
+      function renderBackupReminder() {
+        var notice = renderNotice("Backup recommended", "Your jobs are saved in this browser. Export a backup so you can recover them later.", "warning");
+        var actions = el("div", "notice-actions");
+        actions.appendChild(button("Export Backup", "btn", "export-backup"));
+        actions.appendChild(button("Remind Me Later", "btn secondary", "dismiss-backup"));
+        notice.appendChild(actions);
+        return notice;
+      }
+
+      function renderToday() {
+        var wrap = el("div");
+        var metrics = getMetrics();
+        wrap.appendChild(renderMetricGrid([
+          ["Collect today", formatMoney(metrics.overdue || metrics.unpaid), "Due money", "money", "show-jobs-preset", "collectToday"],
+          ["Follow-ups due", String(metrics.followUps), "Due now", metrics.followUps ? "warn" : "", "show-jobs-preset", "followUpsDue"],
+          ["Review requests", String(metrics.reviewRequests), "Ask next", metrics.reviewRequests ? "success" : "", "show-jobs-preset", "reviewRequests"],
+          ["Unpaid balance", formatMoney(metrics.unpaid), "Open", "", "show-jobs-preset", "unpaidBalance"]
+        ]));
+
+        var actions = getTodayActions();
+        var panel = el("section", "panel section");
+        var head = sectionHead("Today list");
+        panel.appendChild(head);
+        if (!actions.length) {
+          panel.appendChild(emptyState("Nothing needs attention today.", "You can add a job, review upcoming work, or export a backup."));
+        } else {
+          var ledger = el("div", "ledger");
+          actions.forEach(function (item) {
+            ledger.appendChild(renderActionItem(item));
+          });
+          panel.appendChild(ledger);
+        }
+        wrap.appendChild(panel);
+        wrap.appendChild(renderThisWeekSummary(metrics));
+        return wrap;
+      }
+
+      function renderThisWeekSummary(metrics) {
+        var upcoming = state.jobs.filter(function (job) { return isJobScheduledThisWeek(job); }).length;
+        var panel = el("section", "panel section");
+        panel.appendChild(sectionHead("This week"));
+        var grid = el("div", "metric-grid jobs-route-grid");
+        grid.appendChild(summaryCard(String(metrics.openLeads), "Open leads and estimates", "openLeads"));
+        grid.appendChild(summaryCard(String(metrics.invoiceJobs), "Jobs with money still due", "invoiceJobs"));
+        grid.appendChild(summaryCard(String(upcoming), "Scheduled in the next 7 days", "scheduledWeek"));
+        panel.appendChild(grid);
+        return panel;
+      }
+
+      function summaryCard(value, label, preset) {
+        var card = el(preset ? "button" : "article", "metric" + (preset ? " route-filter-card" : ""));
+        if (preset) {
+          card.type = "button";
+          card.dataset.action = "show-jobs-preset";
+          card.dataset.value = preset;
+          card.title = tooltipForAction("show-jobs-preset", label);
+          card.setAttribute("aria-label", "Show " + label + " in Jobs");
+        }
+        card.appendChild(el("span", "metric-label", label));
+        card.appendChild(el("span", "metric-value", value));
+        card.appendChild(el("span", "metric-note", value === "1" ? "job" : "jobs"));
+        return card;
+      }
+
+      function getTodayActions() {
+        var items = [];
+        state.jobs.forEach(function (job) {
+          if (isOverdue(job)) {
+            items.push({ type: "Collect", job: job, tone: "danger", due: job.dueDate, money: balanceDue(job), action: "Collect " + formatMoney(balanceDue(job)) });
+          }
+        });
+        state.jobs.forEach(function (job) {
+          if (isFollowUpDue(job) && !isOverdue(job)) {
+            items.push({ type: "Follow up", job: job, tone: "warn", due: job.followUpDate, money: balanceDue(job), action: job.nextAction || "Follow up" });
+          }
+        });
+        state.jobs.forEach(function (job) {
+          if (job.completedDate && balanceDue(job) === 0 && !job.reviewRequested && !job.reviewReceived) {
+            items.push({ type: "Review", job: job, tone: "success", due: job.completedDate, money: 0, action: "Ask for review" });
+          }
+        });
+        return items.slice(0, 12);
+      }
+
+      function renderActionItem(item) {
+        var node = el("article", "action-item today-action");
+        var main = el("div", "action-main");
+        main.appendChild(el("strong", "", item.job.clientName));
+        main.appendChild(el("span", "", item.job.jobType));
+        node.appendChild(main);
+        var meta = el("div", "action-meta");
+        meta.appendChild(badge(item.type, item.tone));
+        meta.appendChild(badge(statusLabel(item.job.status), "accent"));
+        meta.appendChild(el("span", "amount", item.money ? formatMoney(item.money) : formatDate(item.due)));
+        node.appendChild(meta);
+        var right = el("div", "cell-main action-due");
+        right.appendChild(el("strong", "", item.action));
+        right.appendChild(el("span", "", "Due " + formatDate(item.due)));
+        node.appendChild(right);
+        return node;
+      }
+
+      function renderJobs() {
+        var wrap = el("div");
+        wrap.appendChild(renderRoute());
+        var panel = el("section", "panel section");
+        panel.appendChild(sectionHead("Jobs - " + routeFilter));
+        panel.appendChild(renderControls());
+        var jobs = getFilteredJobs();
+        if (!jobs.length) {
+          panel.appendChild(emptyState("No jobs match this view.", "Clear filters or add a new job."));
+        } else {
+          panel.appendChild(renderJobTable(jobs));
+          panel.appendChild(renderJobCards(jobs));
+        }
+        wrap.appendChild(panel);
+        return wrap;
+      }
+
+      function renderRoute() {
+        var overdue = state.jobs.filter(function (job) { return routeMatches(job, "Do Now"); });
+        var current = state.jobs.filter(function (job) { return routeMatches(job, "Active Work"); });
+        var upcoming = state.jobs.filter(function (job) { return routeMatches(job, "Prepare Next"); });
+        var grid = el("section", "metric-grid jobs-route-grid");
+        grid.appendChild(routeCard("Do Now", overdue.length, "danger"));
+        grid.appendChild(routeCard("Active Work", current.length, ""));
+        grid.appendChild(routeCard("Prepare Next", upcoming.length, "warn"));
+        return grid;
+      }
+
+      function routeCard(label, count, tone) {
+        var isActive = routeFilter === label;
+        var card = el("button", "metric route-filter-card" + (tone ? " " + tone : "") + (isActive ? " active" : ""));
+        card.type = "button";
+        card.dataset.action = "set-route-filter";
+        card.dataset.value = label;
+        card.setAttribute("aria-pressed", isActive ? "true" : "false");
+        card.setAttribute("aria-label", "Show " + label + " jobs");
+        card.appendChild(el("span", "metric-label", label));
+        card.appendChild(el("span", "metric-value", String(count)));
+        card.appendChild(el("span", "metric-note", count === 1 ? "job" : "jobs"));
+        if (isActive) card.appendChild(el("span", "route-selected-badge", "Selected"));
+        return card;
+      }
+
+      function routeMatches(job, route) {
+        if (route === "Do Now") return isOverdue(job) || isFollowUpDue(job);
+        if (route === "Active Work") {
+          return ["Scheduled", "In Progress", "Completed", "Invoice Sent"].indexOf(job.status) >= 0 && !routeMatches(job, "Do Now") && !routeMatches(job, "Prepare Next");
+        }
+        if (route === "Prepare Next") {
+          return ["Paid", "Closed/Lost"].indexOf(job.status) < 0 && hasFutureWorkDate(job);
+        }
+        return true;
+      }
+
+      function resetJobFilters() {
+        filters = {
+          search: "",
+          status: "All",
+          payment: "All",
+          follow: "All",
+          sort: "followUp"
+        };
+        routeFilter = "All";
+      }
+
+      function setRouteFilter(value) {
+        var nextRoute = routeFilter === value ? "All" : value;
+        var currentSort = filters.sort;
+        filters.search = "";
+        filters.status = "All";
+        filters.payment = "All";
+        filters.follow = "All";
+        filters.sort = currentSort;
+        routeFilter = nextRoute;
+        render();
+      }
+
+      function showJobsPreset(preset) {
+        resetJobFilters();
+        if (preset === "collectToday") {
+          filters.follow = getMetrics().overdue ? "Overdue Invoice" : "Balance Due";
+          filters.sort = "balance";
+        }
+        if (preset === "followUpsDue") filters.follow = "Due";
+        if (preset === "reviewRequests") {
+          filters.follow = "Review Needed";
+          filters.sort = "oldest";
+        }
+        if (preset === "unpaidBalance" || preset === "invoiceJobs") {
+          filters.follow = "Balance Due";
+          filters.sort = "balance";
+        }
+        if (preset === "openLeads") filters.follow = "Open Leads";
+        if (preset === "scheduledWeek") {
+          filters.follow = "Scheduled This Week";
+          filters.sort = "oldest";
+        }
+        activeTab = "Jobs";
+        render();
+      }
+
+      function renderControls() {
+        var controls = el("div", "controls");
+        controls.appendChild(inputField("Search", "search", filters.search, "text", "Client, phone, job, notes"));
+        controls.appendChild(selectField("Status", "status", ["All"].concat(statuses), filters.status));
+        controls.appendChild(selectField("Payment", "payment", ["All"].concat(paymentStatuses), filters.payment));
+        controls.appendChild(selectField("Focus", "follow", [
+          "All",
+          ["Due", "Follow-up due"],
+          "This Week",
+          "Overdue Invoice",
+          "Balance Due",
+          "Review Needed",
+          "Open Leads",
+          "Scheduled This Week"
+        ], filters.follow));
+        controls.appendChild(selectField("Sort", "sort", [
+          ["followUp", "Follow-up date"],
+          ["dueDate", "Invoice due date"],
+          ["balance", "Balance due"],
+          ["status", "Status step"],
+          ["newest", "Newest"],
+          ["oldest", "Oldest"]
+        ], filters.sort));
+        return controls;
+      }
+
+      function inputField(labelText, id, value, type, placeholder, filterKind) {
+        var field = el("div", "field");
+        var label = el("label", "", labelText);
+        label.setAttribute("for", id);
+        var input = document.createElement("input");
+        input.id = id;
+        input.type = type;
+        input.value = value || "";
+        if (placeholder) input.placeholder = placeholder;
+        input.dataset[filterKind || "filter"] = id;
+        field.appendChild(label);
+        field.appendChild(input);
+        return field;
+      }
+
+      function selectField(labelText, id, options, value, filterKind) {
+        var field = el("div", "field");
+        var label = el("label", "", labelText);
+        label.setAttribute("for", id);
+        var select = document.createElement("select");
+        select.id = id;
+        select.dataset[filterKind || "filter"] = id;
+        options.forEach(function (option) {
+          var opt = document.createElement("option");
+          if (Array.isArray(option)) {
+            opt.value = option[0];
+            opt.textContent = option[1];
+          } else {
+            opt.value = option;
+            opt.textContent = option;
+          }
+          if (opt.value === value) opt.selected = true;
+          select.appendChild(opt);
+        });
+        field.appendChild(label);
+        field.appendChild(select);
+        return field;
+      }
+
+      function getFilteredJobs() {
+        var list = state.jobs.slice();
+        var query = filters.search.trim().toLowerCase();
+        if (query) {
+          list = list.filter(function (job) {
+            return [job.clientName, job.jobType, job.phone, job.email, job.serviceAddress, job.notes].join(" ").toLowerCase().indexOf(query) >= 0;
+          });
+        }
+        if (filters.status !== "All") list = list.filter(function (job) { return job.status === filters.status; });
+        if (filters.payment !== "All") list = list.filter(function (job) { return job.paymentStatus === filters.payment; });
+        if (filters.follow === "Due") list = list.filter(isFollowUpDue);
+        if (filters.follow === "This Week") list = list.filter(isDueThisWeek);
+        if (filters.follow === "Overdue Invoice") list = list.filter(isOverdue);
+        if (filters.follow === "Balance Due") list = list.filter(function (job) { return balanceDue(job) > 0; });
+        if (filters.follow === "Review Needed") list = list.filter(function (job) { return job.completedDate && balanceDue(job) === 0 && !job.reviewRequested && !job.reviewReceived; });
+        if (filters.follow === "Open Leads") list = list.filter(function (job) { return statusNumber(job.status) > 0 && statusNumber(job.status) < 6; });
+        if (filters.follow === "Scheduled This Week") list = list.filter(isJobScheduledThisWeek);
+        if (routeFilter !== "All") list = list.filter(function (job) { return routeMatches(job, routeFilter); });
+        list.sort(sortJobs);
+        return list;
+      }
+
+      function sortJobs(a, b) {
+        if (filters.sort === "balance") return balanceDue(b) - balanceDue(a);
+        if (filters.sort === "status") return statusNumber(a.status) - statusNumber(b.status);
+        if (filters.sort === "newest") return String(b.createdAt).localeCompare(String(a.createdAt));
+        if (filters.sort === "oldest") return String(a.createdAt).localeCompare(String(b.createdAt));
+        if (filters.sort === "dueDate") return String(a.dueDate || "9999-99-99").localeCompare(String(b.dueDate || "9999-99-99"));
+        return String(a.followUpDate || a.nextActionDate || "9999-99-99").localeCompare(String(b.followUpDate || b.nextActionDate || "9999-99-99"));
+      }
+
+      function renderJobTable(jobs) {
+        var wrap = el("div", "table-wrap");
+        var table = document.createElement("table");
+        table.className = "job-table";
+        var thead = document.createElement("thead");
+        var header = document.createElement("tr");
+        ["Client", "Job", "Status", "Next Action", "Follow-up", "Balance", "Payment", "Actions"].forEach(function (text) {
+          header.appendChild(el("th", "", text));
+        });
+        thead.appendChild(header);
+        table.appendChild(thead);
+        var tbody = document.createElement("tbody");
+        jobs.forEach(function (job) {
+          var row = document.createElement("tr");
+          row.appendChild(tableCell(job.clientName, job.phone || job.email));
+          row.appendChild(tableCell(job.jobType, job.serviceAddress));
+          var statusCell = document.createElement("td");
+          statusCell.appendChild(statusPill(job.status));
+          row.appendChild(statusCell);
+          row.appendChild(tableCell(job.nextAction || "No next action", job.nextActionDate ? formatDate(job.nextActionDate) : ""));
+          row.appendChild(tableCell(formatDate(job.followUpDate), followUpStatus(job)));
+          row.appendChild(tableCell(formatMoney(balanceDue(job)), overdueLabel(job)));
+          var payCell = document.createElement("td");
+          payCell.appendChild(badge(job.paymentStatus, isOverdue(job) ? "danger" : job.paymentStatus === "Paid" ? "success" : ""));
+          row.appendChild(payCell);
+          var actionCell = document.createElement("td");
+          actionCell.appendChild(button("Edit", "btn secondary", "edit-job", job.id));
+          row.appendChild(actionCell);
+          tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+        wrap.appendChild(table);
+        return wrap;
+      }
+
+      function tableCell(mainText, subText) {
+        var cell = document.createElement("td");
+        var main = el("div", "cell-main");
+        main.appendChild(el("strong", "", mainText || "Not set"));
+        if (subText) main.appendChild(el("span", "", subText));
+        cell.appendChild(main);
+        return cell;
+      }
+
+      function infoBlock(mainText, subText) {
+        var main = el("div", "cell-main");
+        main.appendChild(el("strong", "", mainText || "Not set"));
+        if (subText) main.appendChild(el("span", "", subText));
+        return main;
+      }
+
+      function followUpStatus(job) {
+        if (!job.followUpDate) return "";
+        if (isFollowUpDue(job)) return "Today";
+        if (isDueThisWeek(job)) return "This week";
+        return "";
+      }
+
+      function overdueLabel(job) {
+        var days = daysOverdue(job);
+        if (!days) return "";
+        return days + "d late";
+      }
+
+      function renderJobCards(jobs) {
+        var list = el("div", "job-list");
+        jobs.forEach(function (job) {
+          var card = el("article", "job-card");
+          var copy = el("div");
+          var title = el("div", "job-title");
+          title.appendChild(el("strong", "", job.clientName));
+          title.appendChild(el("span", "", job.jobType));
+          copy.appendChild(title);
+          var details = el("div", "job-card-details");
+          details.appendChild(statusPill(job.status));
+          details.appendChild(badge(job.paymentStatus, isOverdue(job) ? "danger" : job.paymentStatus === "Paid" ? "success" : ""));
+          details.appendChild(badge("Follow-up " + formatDate(job.followUpDate), isFollowUpDue(job) ? "warn" : ""));
+          if (balanceDue(job) > 0) details.appendChild(badge(formatMoney(balanceDue(job)) + " open", isOverdue(job) ? "danger" : ""));
+          copy.appendChild(details);
+          if (job.nextAction) copy.appendChild(el("p", "", job.nextAction));
+          card.appendChild(copy);
+          card.appendChild(button("Edit", "btn secondary", "edit-job", job.id));
+          list.appendChild(card);
+        });
+        return list;
+      }
+
+      function renderMoney() {
+        var wrap = el("div");
+        var metrics = getMetrics();
+        wrap.appendChild(renderMetricGrid([
+          ["Overdue balance", formatMoney(metrics.overdue), "Collect first", metrics.overdue ? "danger" : "success", "set-money-preset", "Overdue", moneyFilters.view === "Overdue"],
+          ["Unpaid total", formatMoney(metrics.unpaid), "Open", "money", "set-money-preset", "Unpaid", moneyFilters.view === "Unpaid"],
+          ["Paid total", formatMoney(metrics.paid), "Collected", "success", "set-money-preset", "Paid", moneyFilters.view === "Paid"],
+          ["Invoice jobs", String(metrics.invoiceJobs), "Open", "", "set-money-preset", "InvoiceJobs", moneyFilters.view === "InvoiceJobs"]
+        ]));
+        var layout = el("div", "money-layout");
+        var panel = el("section", "panel section");
+        panel.appendChild(sectionHead("Payments"));
+        panel.appendChild(renderMoneyControls());
+        var moneyJobs = getMoneyJobs();
+        if (!moneyJobs.length) {
+          panel.appendChild(emptyState("No payments match this view.", "Clear the search or change the filters."));
+        } else {
+          var ledger = el("div", "ledger");
+          moneyJobs.forEach(function (job) {
+            ledger.appendChild(renderMoneyItem(job));
+          });
+          panel.appendChild(ledger);
+        }
+        layout.appendChild(panel);
+        var proof = el("aside", "panel section");
+        proof.appendChild(sectionHead("Payment History"));
+        var paidJobs = state.jobs.filter(function (job) { return numberValue(job.amountPaid) > 0 && balanceDue(job) === 0; }).slice(0, 5);
+        if (!paidJobs.length) {
+          proof.appendChild(emptyState("No paid jobs yet.", "Paid totals will appear here after payments are recorded."));
+        } else {
+          var list = el("div", "ledger");
+          paidJobs.forEach(function (job) {
+            var item = el("article", "action-item money-row");
+            item.appendChild(infoBlock(job.clientName, job.jobType));
+            item.appendChild(renderPaymentMeta(job));
+            var right = el("div", "cell-main");
+            right.appendChild(el("strong", "", formatMoney(numberValue(job.amountPaid))));
+            right.appendChild(el("span", "", formatMoney(numberValue(job.invoiceAmount)) + " invoice"));
+            item.appendChild(right);
+            list.appendChild(item);
+          });
+          proof.appendChild(list);
+        }
+        layout.appendChild(proof);
+        wrap.appendChild(layout);
+        return wrap;
+      }
+
+      function renderMoneyControls() {
+        var controls = el("div", "money-controls");
+        controls.appendChild(inputField("Search", "moneySearch", moneyFilters.search, "text", "Client, job, payment notes", "moneyFilter"));
+        controls.appendChild(selectField("View", "moneyView", [
+          ["Unpaid", "Unpaid only"],
+          ["Overdue", "Overdue only"],
+          ["InvoiceJobs", "Invoice jobs"],
+          ["Paid", "Paid only"],
+          ["All", "All invoices"]
+        ], moneyFilters.view, "moneyFilter"));
+        controls.appendChild(selectField("Payment", "moneyPayment", ["All"].concat(paymentStatuses), moneyFilters.payment, "moneyFilter"));
+        controls.appendChild(selectField("Sort", "moneySort", [
+          ["balance", "Balance due"],
+          ["dueDate", "Due date"],
+          ["invoice", "Invoice amount"],
+          ["paid", "Amount paid"],
+          ["client", "Client name"]
+        ], moneyFilters.sort, "moneyFilter"));
+        return controls;
+      }
+
+      function setMoneyPreset(view) {
+        moneyFilters.search = "";
+        moneyFilters.view = view || "Unpaid";
+        moneyFilters.payment = "All";
+        moneyFilters.sort = view === "Paid" ? "paid" : "balance";
+        render();
+      }
+
+      function getMoneyJobs() {
+        var list = state.jobs.filter(function (job) {
+          return balanceDue(job) > 0 || numberValue(job.invoiceAmount) > 0 || numberValue(job.amountPaid) > 0;
+        });
+        var query = moneyFilters.search.trim().toLowerCase();
+        if (query) {
+          list = list.filter(function (job) {
+            return [job.clientName, job.jobType, job.phone, job.email, job.paymentMethod, job.notes].join(" ").toLowerCase().indexOf(query) >= 0;
+          });
+        }
+        if (moneyFilters.view === "Unpaid") list = list.filter(function (job) { return balanceDue(job) > 0; });
+        if (moneyFilters.view === "Overdue") list = list.filter(isOverdue);
+        if (moneyFilters.view === "InvoiceJobs") list = list.filter(function (job) { return numberValue(job.invoiceAmount) > 0 && balanceDue(job) > 0; });
+        if (moneyFilters.view === "Paid") list = list.filter(function (job) { return numberValue(job.amountPaid) > 0 && balanceDue(job) === 0; });
+        if (moneyFilters.payment !== "All") list = list.filter(function (job) { return job.paymentStatus === moneyFilters.payment; });
+        list.sort(sortMoneyJobs);
+        return list;
+      }
+
+      function sortMoneyJobs(a, b) {
+        if (moneyFilters.sort === "dueDate") return String(a.dueDate || "9999-99-99").localeCompare(String(b.dueDate || "9999-99-99"));
+        if (moneyFilters.sort === "invoice") return numberValue(b.invoiceAmount) - numberValue(a.invoiceAmount);
+        if (moneyFilters.sort === "paid") return numberValue(b.amountPaid) - numberValue(a.amountPaid);
+        if (moneyFilters.sort === "client") return String(a.clientName).localeCompare(String(b.clientName));
+        return balanceDue(b) - balanceDue(a);
+      }
+
+      function renderMoneyItem(job) {
+        var item = el("article", "action-item money-row");
+        item.appendChild(infoBlock(job.clientName, job.jobType));
+        item.appendChild(renderPaymentMeta(job));
+        var right = el("div", "cell-main");
+        right.appendChild(el("strong", "", formatMoney(balanceDue(job))));
+        right.appendChild(el("span", "", formatMoney(numberValue(job.invoiceAmount)) + " invoice, " + formatMoney(numberValue(job.amountPaid)) + " paid"));
+        item.appendChild(right);
+        return item;
+      }
+
+      function renderPaymentMeta(job) {
+        var meta = el("div", "action-meta");
+        if (isOverdue(job)) {
+          meta.appendChild(badge("Overdue", "danger"));
+          meta.appendChild(el("small", "", "Due " + formatDate(job.dueDate)));
+        } else if (balanceDue(job) > 0 && job.dueDate) {
+          meta.appendChild(badge("Due", "accent"));
+          meta.appendChild(el("small", "", formatDate(job.dueDate)));
+        } else {
+          meta.appendChild(badge(job.paymentStatus, job.paymentStatus === "Paid" ? "success" : "accent"));
+          if (job.paymentStatus === "Paid") {
+            meta.appendChild(el("small", "", "Paid " + formatDate(job.completedDate || String(job.updatedAt || "").slice(0, 10))));
+          }
+        }
+        meta.classList.add("payment-meta");
+        return meta;
+      }
+
+      function renderData() {
+        var wrap = el("div");
+        var lastBackup = state.meta.lastBackupExportedAt ? new Date(state.meta.lastBackupExportedAt).toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "Never";
+        var changes = numberValue(state.meta.changesSinceLastBackup);
+        var metrics = el("section", "metric-grid data-metric-grid");
+        metrics.appendChild(dataFact("Backup", state.meta.lastBackupExportedAt ? lastBackup : "Needed", state.meta.lastBackupExportedAt ? "Saved" : "Now", state.meta.lastBackupExportedAt ? "success" : "warn"));
+        metrics.appendChild(dataFact("Changes", String(changes), "At 25", changes >= 25 ? "warn" : ""));
+        metrics.appendChild(dataFact("Jobs", String(state.jobs.length), "Saved", "money"));
+        metrics.appendChild(dataFact("Storage", "OK", "Browser", "success"));
+        wrap.appendChild(metrics);
+        if (shouldShowBackupReminder()) {
+          wrap.appendChild(renderDataRecommendation());
+        }
+
+        var main = el("section", "panel section");
+        main.appendChild(sectionHead("Backup"));
+
+        var info = el("article", "data-action data-danger-zone");
+        info.appendChild(el("h3", "", "Data Reset"));
+        info.appendChild(el("p", "danger-note", "Export first before replacing data."));
+        var infoActions = el("div", "notice-actions");
+        infoActions.appendChild(button("Load Sample Data", "btn danger-outline", "reload-sample"));
+        infoActions.appendChild(button("Erase All Saved Data", "btn danger", "reset-data"));
+        info.appendChild(infoActions);
+
+        var tools = el("div", "data-tools-grid");
+        tools.appendChild(dataAction("Export Backup", "Save a restore file.", button("Export Backup", "btn", "export-backup")));
+        tools.appendChild(dataAction("Import Backup", "Restore after preview.", button("Import Backup", "btn secondary", "choose-import")));
+        tools.appendChild(dataAction("Export", "Job rows for spreadsheets.", button("Export", "btn secondary", "export-csv")));
+        tools.appendChild(info);
+        main.appendChild(tools);
+
+        main.appendChild(installAction());
+        main.appendChild(moveDataAction());
+
+        wrap.appendChild(main);
+        return wrap;
+      }
+
+      function renderBackupHero(lastBackup) {
+        var primary = el("div", "data-primary backup-hero");
+        var primaryCopy = el("div");
+        primaryCopy.appendChild(el("h3", "", "Save a backup file"));
+        primaryCopy.appendChild(el("p", "", "Download a restore file for jobs, payments, notes, and settings."));
+        primaryCopy.appendChild(el("p", "metric-note", "Last backup: " + lastBackup));
+        primary.appendChild(primaryCopy);
+        var primaryActions = el("div", "notice-actions");
+        primaryActions.appendChild(button("Export Backup", "btn", "export-backup"));
+        if (shouldShowBackupReminder()) {
+          primaryActions.appendChild(button("Remind Me Later", "btn secondary", "dismiss-backup"));
+        }
+        primary.appendChild(primaryActions);
+        return primary;
+      }
+
+      function renderDataRecommendation() {
+        var notice = el("section", "data-recommendation");
+        var copy = el("div");
+        copy.appendChild(el("h2", "", "Backup recommended"));
+        copy.appendChild(el("p", "", "Export a backup so you can recover jobs later."));
+        notice.appendChild(copy);
+        var actions = el("div", "notice-actions");
+        actions.appendChild(button("Export Backup", "btn", "export-backup"));
+        actions.appendChild(button("Remind Me Later", "btn secondary", "dismiss-backup"));
+        notice.appendChild(actions);
+        return notice;
+      }
+
+      function dataStatusCard(label, value, note, tone) {
+        var card = el("article", "data-status-card" + (tone ? " " + tone : ""));
+        card.appendChild(el("span", "metric-label", label));
+        card.appendChild(el("span", "metric-value", value));
+        card.appendChild(el("span", "metric-note", note));
+        return card;
+      }
+
+      function dataFact(label, value, note, tone) {
+        var card = el("article", "metric" + (tone ? " " + tone : ""));
+        card.appendChild(el("span", "metric-label", label));
+        card.appendChild(el("span", "metric-value", value));
+        card.appendChild(el("span", "metric-note", note));
+        return card;
+      }
+
+      function dataAction(title, text, actionButton) {
+        var card = el("article", "data-action");
+        card.appendChild(el("h3", "", title));
+        card.appendChild(el("p", "", text));
+        if (actionButton) card.appendChild(actionButton);
+        return card;
+      }
+
+      function installAction() {
+        var card = dataAction("Phone / Tablet Installation", "Add JobDue to your iPhone or iPad home screen.", null);
+        card.classList.add("install");
+        var options = el("div", "install-options");
+        options.appendChild(installCard("iPhone or iPad", [
+          "Open the hosted JobDue link in Safari.",
+          "Tap Share.",
+          "Choose Add to Home Screen.",
+          "Tap Add."
+        ]));
+        card.appendChild(options);
+        return card;
+      }
+
+      function moveDataAction() {
+        var card = dataAction("Move Data Between Devices", "Move backup files manually. JobDue does not create live sync.", null);
+        card.classList.add("transfer");
+        var options = el("div", "install-options");
+        options.appendChild(installCard("iPhone or iPad to PC/Mac", [
+          "Export Backup from Data.",
+          "Save it to iCloud Drive, Google Drive, Downloads, or email.",
+          "Open JobDue on PC/Mac and Import Backup."
+        ]));
+        options.appendChild(installCard("PC/Mac to iPhone or iPad", [
+          "Export Backup on PC/Mac.",
+          "Send or save the file to iCloud Drive, Google Drive, or email.",
+          "Open JobDue on iPhone or iPad and Import Backup."
+        ]));
+        card.appendChild(options);
+        return card;
+      }
+
+      function installCard(title, steps) {
+        var card = el("div", "install-card");
+        card.appendChild(el("strong", "", title));
+        var list = el("ol");
+        steps.forEach(function (step) {
+          list.appendChild(el("li", "", step));
+        });
+        card.appendChild(list);
+        return card;
+      }
+
+      function renderMetricGrid(metrics, extraClass) {
+        var grid = el("section", "metric-grid" + (extraClass ? " " + extraClass : ""));
+        metrics.forEach(function (metric) {
+          var action = metric[4];
+          var card = el(action ? "button" : "article", "metric" + (metric[3] ? " " + metric[3] : "") + (action ? " route-filter-card" : "") + (metric[6] ? " active" : ""));
+          if (action) {
+            card.type = "button";
+            card.dataset.action = action;
+            card.dataset.value = metric[5];
+            card.title = tooltipForAction(action, metric[0]);
+            card.setAttribute("aria-label", "Show " + metric[0]);
+            card.setAttribute("aria-pressed", metric[6] ? "true" : "false");
+          }
+          card.appendChild(el("span", "metric-label", metric[0]));
+          card.appendChild(el("span", "metric-value", metric[1]));
+          card.appendChild(el("span", "metric-note", metric[2]));
+          if (metric[6]) card.appendChild(el("span", "route-selected-badge", "Selected"));
+          grid.appendChild(card);
+        });
+        return grid;
+      }
+
+      function sectionHead(title, subtitle) {
+        var head = el("div", "section-head");
+        var copy = el("div");
+        copy.appendChild(el("h2", "", title));
+        if (subtitle) copy.appendChild(el("p", "", subtitle));
+        head.appendChild(copy);
+        return head;
+      }
+
+      function emptyState(title, subtitle) {
+        var empty = el("div", "empty");
+        empty.appendChild(el("strong", "", title));
+        empty.appendChild(el("p", "", subtitle));
+        return empty;
+      }
+
+      function openJobModal(jobId) {
+        editingJobId = jobId || null;
+        var job = editingJobId ? state.jobs.find(function (item) { return item.id === editingJobId; }) : null;
+        if (!job) job = normalizeJob({
+          id: "",
+          clientName: "",
+          jobType: "",
+          status: "New Lead",
+          nextAction: nextActionForStatus("New Lead"),
+          nextActionDate: todayString(),
+          followUpDate: addDaysString(todayString(), 7),
+          paymentStatus: "Invoice Needed",
+          estimateStatus: "Not Needed"
+        });
+        document.getElementById("jobModalTitle").textContent = editingJobId ? "Edit Job" : "Add Job";
+        document.getElementById("deleteJobButton").style.display = editingJobId ? "" : "none";
+        renderJobForm(job);
+        document.getElementById("jobModal").classList.add("open");
+        setTimeout(function () {
+          var first = document.querySelector("#jobForm input, #jobForm select, #jobForm textarea");
+          if (first) first.focus();
+        }, 0);
+      }
+
+      function closeJobModal() {
+        document.getElementById("jobModal").classList.remove("open");
+        editingJobId = null;
+      }
+
+      function renderJobForm(job) {
+        var root = document.getElementById("jobFormFields");
+        root.textContent = "";
+        jobFormSections.forEach(function (section) {
+          root.appendChild(formSection(section[0], section[1], job, section[2]));
+        });
+        var details = document.createElement("details");
+        var summary = document.createElement("summary");
+        summary.textContent = "Optional details";
+        details.appendChild(summary);
+        var grid = el("div", "details-grid");
+        optionalFields.forEach(function (field) {
+          grid.appendChild(formField(field, job));
+        });
+        details.appendChild(grid);
+        root.appendChild(details);
+        attachStatusFormSync();
+        attachPaymentFormSync();
+      }
+
+      function attachStatusFormSync() {
+        var form = document.getElementById("jobForm");
+        if (!form || !form.elements.status) return;
+        var statusInput = form.elements.status;
+        statusInput.addEventListener("change", function () {
+          var nextAction = nextActionForStatus(statusInput.value);
+          if (form.elements.nextAction) form.elements.nextAction.value = nextAction;
+          if (form.elements.nextActionDate) form.elements.nextActionDate.value = todayString();
+          if (form.elements.followUpDate) form.elements.followUpDate.value = addDaysString(todayString(), 7);
+          if (statusInput.value === "Paid") {
+            if (form.elements.paymentStatus) form.elements.paymentStatus.value = "Paid";
+            if (form.elements.completedDate && !form.elements.completedDate.value) form.elements.completedDate.value = todayString();
+          }
+        });
+      }
+
+      function attachPaymentFormSync() {
+        var form = document.getElementById("jobForm");
+        if (!form) return;
+        var invoiceInput = form.elements.invoiceAmount;
+        var paidInput = form.elements.amountPaid;
+        var statusInput = form.elements.status;
+        var paymentInput = form.elements.paymentStatus;
+        if (!invoiceInput || !paidInput || !statusInput) return;
+
+        function syncPaymentFields() {
+          var candidate = {
+            status: statusInput.value,
+            nextAction: form.elements.nextAction ? form.elements.nextAction.value : "",
+            nextActionDate: form.elements.nextActionDate ? form.elements.nextActionDate.value : "",
+            invoiceSentDate: form.elements.invoiceSentDate ? form.elements.invoiceSentDate.value : "",
+            invoiceAmount: numberValue(invoiceInput.value),
+            amountPaid: numberValue(paidInput.value),
+            paymentStatus: paymentInput ? paymentInput.value : "Invoice Needed",
+            dueDate: form.elements.dueDate ? form.elements.dueDate.value : "",
+            followUpDate: form.elements.followUpDate ? form.elements.followUpDate.value : "",
+            completedDate: form.elements.completedDate ? form.elements.completedDate.value : "",
+            reviewRequested: form.elements.reviewRequested ? !!form.elements.reviewRequested.checked : false,
+            reviewRequestDate: form.elements.reviewRequestDate ? form.elements.reviewRequestDate.value : "",
+            reviewReceived: form.elements.reviewReceived ? !!form.elements.reviewReceived.checked : false
+          };
+          applyPaymentProgressRules(candidate);
+          statusInput.value = candidate.status;
+          if (paymentInput) paymentInput.value = candidate.paymentStatus;
+          if (form.elements.nextAction && form.elements.nextAction.value !== candidate.nextAction) form.elements.nextAction.value = candidate.nextAction;
+          if (form.elements.nextActionDate && form.elements.nextActionDate.value !== candidate.nextActionDate) form.elements.nextActionDate.value = candidate.nextActionDate;
+          if (form.elements.followUpDate && form.elements.followUpDate.value !== candidate.followUpDate) form.elements.followUpDate.value = candidate.followUpDate;
+          if (form.elements.completedDate && form.elements.completedDate.value !== candidate.completedDate) form.elements.completedDate.value = candidate.completedDate;
+        }
+
+        ["input", "change"].forEach(function (eventName) {
+          invoiceInput.addEventListener(eventName, syncPaymentFields);
+          paidInput.addEventListener(eventName, syncPaymentFields);
+          if (form.elements.dueDate) form.elements.dueDate.addEventListener(eventName, syncPaymentFields);
+        });
+      }
+
+      function fieldDef(key) {
+        return fields.concat(optionalFields).find(function (field) { return field[0] === key; });
+      }
+
+      function formSection(title, keys, job, tone) {
+        var section = el("section", "form-section");
+        section.appendChild(el("h3", "", title));
+        var grid = el("div", "form-section-grid" + (tone ? " " + tone : ""));
+        keys.forEach(function (key) {
+          var def = fieldDef(key);
+          if (def) grid.appendChild(formField(def, job));
+        });
+        section.appendChild(grid);
+        return section;
+      }
+
+      function formField(def, job) {
+        var key = def[0];
+        var labelText = def[1];
+        var type = def[2];
+        var required = def[3];
+        var field = el("div", (key === "notes" ? "field full" : "field") + (required ? " required" : ""));
+        var label = el("label", "", labelText);
+        if (required) label.appendChild(el("span", "required-tag", "Required"));
+        label.setAttribute("for", "field_" + key);
+        field.appendChild(label);
+        var input;
+        if (type === "textarea") {
+          input = document.createElement("textarea");
+          input.value = job[key] || "";
+          if (placeholders[key]) input.placeholder = placeholders[key];
+        } else if (type === "selectStatus" || type === "selectPayment" || type === "selectEstimate") {
+          input = document.createElement("select");
+          var opts = type === "selectStatus" ? statuses : type === "selectPayment" ? paymentStatuses : estimateStatuses;
+          opts.forEach(function (option) {
+            var opt = document.createElement("option");
+            opt.value = option;
+            opt.textContent = type === "selectStatus" ? statusLabel(option) : option;
+            if (job[key] === option) opt.selected = true;
+            input.appendChild(opt);
+          });
+        } else {
+          input = document.createElement("input");
+          input.type = type === "checkbox" ? "checkbox" : type;
+          if (type === "checkbox") {
+            input.checked = !!job[key];
+          } else {
+            input.value = job[key] == null ? "" : String(job[key]);
+          }
+          if (type === "number") {
+            input.min = "0";
+            input.step = "1";
+            input.inputMode = "decimal";
+          }
+          if (placeholders[key]) input.placeholder = placeholders[key];
+        }
+        input.id = "field_" + key;
+        input.name = key;
+        if (required) input.required = true;
+        field.appendChild(input);
+        return field;
+      }
+
+      function saveJobFromForm(event) {
+        event.preventDefault();
+        var form = document.getElementById("jobForm");
+        var data = {};
+        fields.concat(optionalFields).forEach(function (field) {
+          var key = field[0];
+          var type = field[2];
+          var input = form.elements[key];
+          if (!input) return;
+          if (type === "checkbox") data[key] = !!input.checked;
+          else if (type === "number") data[key] = numberValue(input.value);
+          else data[key] = input.value.trim();
+        });
+        var now = new Date().toISOString();
+        if (editingJobId) {
+          var index = state.jobs.findIndex(function (job) { return job.id === editingJobId; });
+          if (index >= 0) {
+            state.jobs[index] = normalizeJob(Object.assign({}, state.jobs[index], data, { updatedAt: now }));
+          }
+        } else {
+          state.jobs.unshift(normalizeJob(Object.assign(data, { id: newId(), createdAt: now, updatedAt: now })));
+        }
+        state.meta.onboarded = true;
+        saveState(true);
+        closeJobModal();
+        render();
+      }
+
+      function deleteCurrentJob() {
+        if (!editingJobId) return;
+        var job = state.jobs.find(function (item) { return item.id === editingJobId; });
+        var name = job ? job.clientName : "this job";
+        if (!window.confirm("Delete " + name + "? This cannot be undone.")) return;
+        state.jobs = state.jobs.filter(function (item) { return item.id !== editingJobId; });
+        saveState(true);
+        closeJobModal();
+        render();
+      }
+
+      function exportBackup() {
+        if (recoveryMode) return;
+        state.meta.lastBackupExportedAt = new Date().toISOString();
+        state.meta.changesSinceLastBackup = 0;
+        state.meta.backupReminderDismissedAt = "";
+        saveState(false);
+        downloadFile("contractor-tracker-backup-" + todayString() + ".json", JSON.stringify(state, null, 2), "application/json");
+        render();
+      }
+
+      function exportRaw() {
+        downloadFile("contractor-tracker-unreadable-data-" + todayString() + ".txt", rawCorruptedState || "", "text/plain");
+      }
+
+      function exportCsv() {
+        var headers = ["Client", "Phone", "Email", "Address", "Job Type", "Status", "Next Action", "Follow Up", "Invoice Amount", "Amount Paid", "Balance Due", "Due Date", "Payment Status", "Notes"];
+        var rows = state.jobs.map(function (job) {
+          return [
+            job.clientName,
+            job.phone,
+            job.email,
+            job.serviceAddress,
+            job.jobType,
+            statusLabel(job.status),
+            job.nextAction,
+            job.followUpDate,
+            job.invoiceAmount,
+            job.amountPaid,
+            balanceDue(job),
+            job.dueDate,
+            job.paymentStatus,
+            job.notes
+          ];
+        });
+        var csv = [headers].concat(rows).map(function (row) {
+          return row.map(csvEscape).join(",");
+        }).join("\r\n");
+        downloadFile("contractor-tracker-jobs-" + todayString() + ".csv", csv, "text/csv");
+      }
+
+      function csvEscape(value) {
+        var text = value == null ? "" : String(value);
+        if (/[",\r\n]/.test(text)) return '"' + text.replace(/"/g, '""') + '"';
+        return text;
+      }
+
+      function downloadFile(filename, content, type) {
+        var blob = new Blob([content], { type: type });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 0);
+      }
+
+      function chooseImport() {
+        var input = document.getElementById("importFile");
+        input.value = "";
+        input.click();
+      }
+
+      function handleImportFile(event) {
+        var file = event.target.files && event.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          try {
+            var parsed = JSON.parse(String(reader.result || ""));
+            var result = validateState(parsed);
+            if (!result.ok) {
+              showImportError(result.message);
+              return;
+            }
+            pendingImport = normalizeState(parsed);
+            openImportPreview();
+          } catch (error) {
+            showImportError("This backup file could not be read. Your current data was not changed.");
+          }
+        };
+        reader.onerror = function () {
+          showImportError("This backup file could not be read. Your current data was not changed.");
+        };
+        reader.readAsText(file);
+      }
+
+      function showImportError(message) {
+        storageWarning = message;
+        recoveryMode = false;
+        if (!state) state = getDefaultState();
+        document.getElementById("importFile").value = "";
+        activeTab = "Data";
+        render();
+      }
+
+      function openImportPreview() {
+        var root = document.getElementById("importPreview");
+        root.textContent = "";
+        var panel = el("div", "notice warning");
+        var copy = el("div");
+        copy.appendChild(el("h3", "", "Import will replace current jobs"));
+        copy.appendChild(el("p", "", "Backup jobs: " + pendingImport.jobs.length + ". Current jobs in this browser: " + state.jobs.length + ". Current data is unchanged until you confirm."));
+        var meta = el("p", "", "Backup date: " + (pendingImport.meta.lastBackupExportedAt ? new Date(pendingImport.meta.lastBackupExportedAt).toLocaleString() : "Not included"));
+        copy.appendChild(meta);
+        panel.appendChild(copy);
+        root.appendChild(panel);
+        document.getElementById("importModal").classList.add("open");
+      }
+
+      function closeImportModal() {
+        pendingImport = null;
+        document.getElementById("importFile").value = "";
+        document.getElementById("importModal").classList.remove("open");
+      }
+
+      function confirmImport() {
+        if (!pendingImport) return;
+        if (!window.confirm("Importing this backup will replace the jobs currently saved in this browser. Export a backup first if you want to keep them.")) return;
+        state = pendingImport;
+        state.meta.onboarded = true;
+        recoveryMode = false;
+        storageWarning = "";
+        saveState(false);
+        closeImportModal();
+        activeTab = "Today";
+        render();
+      }
+
+      function resetData() {
+        if (!window.confirm("Erase all jobs, payments, notes, and settings saved in this browser? Export a backup first if you want to keep them.")) return;
+        if (!window.confirm("This will permanently remove the data saved in this browser. Continue?")) return;
+        recoveryMode = false;
+        rawCorruptedState = "";
+        storageWarning = "";
+        state = createState([], true);
+        try {
+          localStorage.setItem(activeStorageKey(), JSON.stringify(state));
+        } catch (error) {
+          storageWarning = "This browser is blocking local storage. Reset could not be saved.";
+        }
+        render();
+      }
+
+      function useSampleData() {
+        state = createState(getSampleJobs(), true);
+        saveState(false);
+        render();
+      }
+
+      function reloadSampleData() {
+        if (!window.confirm("Replace your current jobs with sample data? Export a backup first if you want to keep your current jobs.")) return;
+        if (!window.confirm("This will overwrite the jobs saved in this browser. Continue?")) return;
+        state = createState(getSampleJobs(), true);
+        saveState(false);
+        activeTab = "Today";
+        render();
+      }
+
+      function startBlank() {
+        state = createState([], true);
+        saveState(false);
+        render();
+      }
+
+      function closeHelpTips(exceptButton) {
+        document.querySelectorAll(".help-wrap").forEach(function (wrap) {
+          var buttonNode = wrap.querySelector(".help-tip");
+          var popover = wrap.querySelector(".help-popover");
+          if (!buttonNode || !popover || buttonNode === exceptButton) return;
+          buttonNode.setAttribute("aria-expanded", "false");
+          popover.hidden = true;
+        });
+      }
+
+      function toggleHelpTip(buttonNode) {
+        var wrap = buttonNode.closest(".help-wrap");
+        if (!wrap) return;
+        var popover = wrap.querySelector(".help-popover");
+        if (!popover) return;
+        var willOpen = popover.hidden;
+        closeHelpTips(buttonNode);
+        popover.hidden = !willOpen;
+        buttonNode.setAttribute("aria-expanded", willOpen ? "true" : "false");
+      }
+
+      document.addEventListener("click", function (event) {
+        var target = event.target.closest("[data-action]");
+        if (!target) {
+          if (!event.target.closest(".help-wrap")) closeHelpTips();
+          return;
+        }
+        var action = target.dataset.action;
+        var value = target.dataset.value;
+        if (action === "toggle-help") {
+          toggleHelpTip(target);
+          return;
+        }
+        if (!target.closest(".help-wrap")) closeHelpTips();
+        if (action === "set-tab") {
+          activeTab = value;
+          render();
+        }
+        if (action === "set-route-filter") {
+          setRouteFilter(value);
+        }
+        if (action === "show-jobs-preset") showJobsPreset(value);
+        if (action === "set-money-preset") setMoneyPreset(value);
+        if (action === "new-job") openJobModal();
+        if (action === "edit-job") openJobModal(value);
+        if (action === "close-job-modal") closeJobModal();
+        if (action === "close-import-modal") closeImportModal();
+        if (action === "use-sample") useSampleData();
+        if (action === "start-blank") startBlank();
+        if (action === "export-backup") exportBackup();
+        if (action === "export-csv") exportCsv();
+        if (action === "choose-import") chooseImport();
+        if (action === "dismiss-backup") {
+          state.meta.backupReminderDismissedAt = new Date().toISOString();
+          saveState(false);
+          render();
+        }
+        if (action === "reload-sample") reloadSampleData();
+        if (action === "reset-data") resetData();
+        if (action === "export-raw") exportRaw();
+      });
+
+      document.addEventListener("input", function (event) {
+        var input = event.target;
+        if (!input.dataset || (!input.dataset.filter && !input.dataset.moneyFilter)) return;
+        var activeId = input.id;
+        var selectionStart = input.selectionStart;
+        var selectionEnd = input.selectionEnd;
+        if (input.dataset.filter) filters[input.dataset.filter] = input.value;
+        if (input.dataset.moneyFilter) {
+          var moneyKey = input.dataset.moneyFilter.replace(/^money/, "");
+          moneyKey = moneyKey.charAt(0).toLowerCase() + moneyKey.slice(1);
+          moneyFilters[moneyKey] = input.value;
+        }
+        render();
+        var nextInput = activeId ? document.getElementById(activeId) : null;
+        if (nextInput) {
+          nextInput.focus();
+          if (typeof nextInput.setSelectionRange === "function" && selectionStart !== null && selectionEnd !== null) {
+            nextInput.setSelectionRange(selectionStart, selectionEnd);
+          }
+        }
+      });
+
+      document.addEventListener("change", function (event) {
+        var input = event.target;
+        if (!input.dataset || (!input.dataset.filter && !input.dataset.moneyFilter)) return;
+        if (input.dataset.filter) filters[input.dataset.filter] = input.value;
+        if (input.dataset.moneyFilter) {
+          var moneyKey = input.dataset.moneyFilter.replace(/^money/, "");
+          moneyKey = moneyKey.charAt(0).toLowerCase() + moneyKey.slice(1);
+          moneyFilters[moneyKey] = input.value;
+        }
+        render();
+      });
+
+      document.getElementById("jobForm").addEventListener("submit", saveJobFromForm);
+      document.getElementById("deleteJobButton").addEventListener("click", deleteCurrentJob);
+      document.getElementById("importFile").addEventListener("change", handleImportFile);
+      document.getElementById("confirmImportButton").addEventListener("click", confirmImport);
+
+      if ("serviceWorker" in navigator && /^https?:$/.test(window.location.protocol)) {
+        navigator.serviceWorker.register("service-worker.js").catch(function () {
+          // Local file mode still works; service worker is only for hosted phone install.
+        });
+      }
+
+      loadState();
+      render();
+    })();
+  </script>
+</body>
+</html>

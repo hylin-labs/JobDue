@@ -1,0 +1,17 @@
+# JobDue
+
+JobDue is a no-login browser app for solo contractors and home-service pros.
+It helps users track jobs, unpaid balances, follow-ups, payment status, review requests, and local backup/export.
+
+Canonical site: https://app.hi-craniai.workers.dev/
+Product guide: https://app.hi-craniai.workers.dev/infographics.html
+Purchase: https://gumroad.com/l/jobdue-launch-placeholder
+Support: hi.craniai@gmail.com
+
+Current offer: $14.99 early-bird launch price through the Gumroad promotion link. Regular listing price is $29.99.
+
+Important product boundaries:
+JobDue is not cloud sync, invoice sending, payment processing, dispatch software, team routing, QuickBooks integration, payroll software, or full accounting software.
+
+Primary audience:
+Solo handymen, contractors, cleaners, landscapers, painters, and small home-service operators who want a simple local job and payment tracker without monthly contractor software.

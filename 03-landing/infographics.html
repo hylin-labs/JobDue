@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JobDue Product Guide - Screenshots and Setup Overview</title>
+  <meta name="description" content="See JobDue screenshots, product visuals, and setup guidance for the offline job, payment, and follow-up tracker for solo contractors.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#247C82">
+  <link rel="canonical" href="https://app.hi-craniai.workers.dev/infographics.html">
+  <link rel="icon" href="assets/jobdue-icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/jobdue-apple-touch-icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://app.hi-craniai.workers.dev/infographics.html">
+  <meta property="og:title" content="JobDue Product Guide">
+  <meta property="og:description" content="A visual guide to JobDue screenshots, setup guidance, and what buyers receive.">
+  <meta property="og:image" content="https://app.hi-craniai.workers.dev/assets/jobdue-guide-cover.jpg">
+  <meta property="og:image:alt" content="JobDue product guide cover showing the contractor job and payment tracker.">
+  <meta property="og:site_name" content="JobDue">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JobDue Product Guide">
+  <meta name="twitter:description" content="See screenshots, setup guidance, and what comes with JobDue.">
+  <meta name="twitter:image" content="https://app.hi-craniai.workers.dev/assets/jobdue-guide-cover.jpg">
+  <meta name="twitter:image:alt" content="JobDue product guide cover showing the contractor job and payment tracker.">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPRKXVD7DZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-VPRKXVD7DZ');
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef5f7;
+      --panel: #ffffff;
+      --text: #162326;
+      --text-strong: #07151a;
+      --muted: #53666b;
+      --primary: #247c82;
+      --primary-dark: #155a60;
+      --teal: #12a087;
+      --border: #d8e2e5;
+      --line: #c8d8dc;
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.13);
+      --shadow-soft: 0 14px 36px rgba(15, 23, 42, 0.08);
+      --radius: 12px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 78% 12%, rgba(36, 124, 130, 0.14), transparent 28rem),
+        radial-gradient(circle at 18% 82%, rgba(207, 229, 255, 0.78), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    a {
+      color: inherit;
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(36, 124, 130, 0.42);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(200, 216, 220, 0.85);
+      background: rgba(238, 245, 247, 0.92);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand,
+    .nav-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      color: var(--text-strong);
+      font-size: 1.2rem;
+      font-weight: 950;
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+    }
+
+    .nav-actions a {
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .nav-actions .button {
+      color: #fff;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: var(--primary);
+      padding: 12px 18px;
+      color: #fff;
+      font-weight: 900;
+      line-height: 1;
+      text-decoration: none;
+      transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+    }
+
+    .button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .button-secondary {
+      border-color: rgba(22, 35, 38, 0.15);
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--text-strong);
+    }
+
+    .button-secondary:hover {
+      background: #fff;
+    }
+
+    main {
+      padding: clamp(3rem, 6vw, 5rem) 0 clamp(4rem, 7vw, 6rem);
+    }
+
+    .guide-hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+    }
+
+    .intro {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      color: var(--text-strong);
+      font-size: 0.88rem;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--teal);
+    }
+
+    h1,
+    p,
+    figure {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 18px;
+      color: var(--text-strong);
+      font-size: clamp(3rem, 6.4vw, 6rem);
+      font-weight: 950;
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .intro p {
+      max-width: 760px;
+      margin-right: auto;
+      margin-bottom: 26px;
+      margin-left: auto;
+      color: #41545a;
+      font-size: clamp(1.22rem, 1.65vw, 1.55rem);
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .intro-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .guide-carousel {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .carousel-stage {
+      position: relative;
+      min-height: clamp(600px, 68vw, 860px);
+      perspective: 1600px;
+      padding-bottom: 58px;
+    }
+
+    .guide-slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-content: start;
+      overflow: hidden;
+      border: 1px solid rgba(22, 35, 38, 0.14);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.96);
+      padding: clamp(0.8rem, 1.4vw, 1.25rem);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(42px) translateY(22px) scale(0.93);
+      transition: opacity 220ms ease, transform 320ms ease, box-shadow 220ms ease;
+    }
+
+    .guide-slide.is-active {
+      z-index: 4;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0) translateY(0) scale(1);
+    }
+
+    .guide-slide.is-next {
+      z-index: 3;
+      opacity: 0.56;
+      transform: translateX(36px) translateY(28px) scale(0.96);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .guide-slide.is-after {
+      z-index: 2;
+      opacity: 0.28;
+      transform: translateX(68px) translateY(56px) scale(0.92);
+      box-shadow: none;
+    }
+
+    .guide-slide img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 14px;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .slide-caption {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 4px 2px;
+    }
+
+    .slide-caption strong {
+      display: block;
+      color: var(--text-strong);
+      font-size: 1.2rem;
+      font-weight: 950;
+      line-height: 1.1;
+    }
+
+    .slide-caption span {
+      display: block;
+      max-width: 390px;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .slide-count {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: #e6f7f5;
+      padding: 7px 10px;
+      color: var(--primary-dark);
+      font-size: 0.82rem;
+      font-weight: 950;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      right: auto;
+      bottom: clamp(5.7rem, 7vw, 6.6rem);
+      left: 50%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px;
+      box-shadow: 0 16px 38px rgba(15, 23, 42, 0.16);
+      transform: translateX(-50%);
+      backdrop-filter: blur(16px);
+    }
+
+    .control-group {
+      display: inline-flex;
+      gap: 10px;
+    }
+
+    .carousel-button {
+      display: inline-grid;
+      width: 48px;
+      height: 44px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--text-strong);
+      font-size: 1.35rem;
+      font-weight: 950;
+      line-height: 1;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .carousel-button:hover {
+      border-color: var(--primary);
+      background: #f6fbfb;
+      transform: translateY(-1px);
+    }
+
+    .current-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      color: var(--text-strong);
+      font-size: 0.95rem;
+      font-weight: 900;
+    }
+
+    .thumb-list {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 8px;
+      overflow-x: auto;
+      border: 1px solid rgba(22, 35, 38, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      padding: 10px;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+      scrollbar-width: thin;
+    }
+
+    .thumb-button {
+      flex: 0 0 auto;
+      min-width: 112px;
+      min-height: 50px;
+      border: 1px solid rgba(36, 124, 130, 0.22);
+      border-radius: 999px;
+      background: #ffffff;
+      padding: 11px 17px;
+      color: var(--text-strong);
+      font-size: 0.92rem;
+      font-weight: 950;
+      line-height: 1.1;
+      text-align: center;
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.09);
+      transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .thumb-button:hover,
+    .thumb-button[aria-selected="true"] {
+      border-color: rgba(36, 124, 130, 0.5);
+      background: var(--primary);
+      color: var(--primary-dark);
+      color: #fff;
+      box-shadow: 0 13px 28px rgba(36, 124, 130, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .noscript-grid {
+      display: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .guide-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .intro {
+        max-width: 760px;
+      }
+
+      .carousel-stage {
+        min-height: clamp(510px, 84vw, 780px);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .nav-actions a:not(.button) {
+        display: none;
+      }
+
+      main {
+        padding: 38px 0 58px;
+      }
+
+      h1 {
+        font-size: clamp(2.35rem, 12vw, 3.3rem);
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .intro-actions {
+        display: grid;
+      }
+
+      .carousel-stage {
+        min-height: 430px;
+      }
+
+      .guide-slide {
+        border-radius: 16px;
+      }
+
+      .guide-slide.is-next,
+      .guide-slide.is-after {
+        transform: translateX(14px) translateY(16px) scale(0.96);
+      }
+
+      .slide-caption {
+        display: grid;
+        gap: 10px;
+      }
+
+      .carousel-controls {
+        bottom: 5.25rem;
+      }
+
+      .thumb-list {
+        gap: 10px;
+        justify-content: flex-start;
+        border-radius: 18px;
+      }
+
+      .thumb-button {
+        min-width: 110px;
+        min-height: 50px;
+        padding: 10px 14px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .carousel-stage {
+        min-height: 385px;
+      }
+
+      .slide-caption strong {
+        font-size: 1.05rem;
+      }
+
+      .slide-caption span {
+        font-size: 0.86rem;
+      }
+    }
+  </style>
+  <noscript>
+    <style>
+      .guide-carousel {
+        display: none !important;
+      }
+
+      .noscript-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .noscript-frame {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--panel);
+        padding: 14px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .noscript-frame img {
+        border-radius: 10px;
+      }
+
+      .noscript-frame figcaption {
+        padding-top: 12px;
+        color: var(--text-strong);
+        font-weight: 900;
+      }
+
+      @media (max-width: 680px) {
+        .noscript-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </noscript>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="JobDue landing page">
+        <img src="assets/jobdue-icon-192.png" alt="" width="42" height="42">
+        <span>JobDue</span>
+      </a>
+      <nav class="nav-actions" aria-label="Product guide navigation">
+        <a href="index.html">Landing Page</a>
+        <a class="button" href="https://gumroad.com/l/jobdue-launch-placeholder">Get JobDue</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container guide-hero">
+      <div class="intro">
+        <span class="eyebrow">Product guide</span>
+        <h1>JobDue Visual Guide</h1>
+        <p>Preview the real screens and buyer package before you buy.</p>
+        <div class="intro-actions">
+          <a class="button" href="https://gumroad.com/l/jobdue-launch-placeholder">Get JobDue</a>
+          <a class="button button-secondary" href="index.html">Back to Landing Page</a>
+        </div>
+      </div>
+
+      <section class="guide-carousel" aria-label="JobDue product guide carousel">
+        <div class="carousel-stage" aria-live="polite">
+          <figure class="guide-slide is-active" data-title="Launch cover">
+            <img src="assets/jobdue-guide-cover.webp" alt="JobDue cover image for the contractor job and payment tracker" width="3651" height="2739" decoding="async">
+            <figcaption class="slide-caption">
+              <span><strong>Launch cover</strong><span>Quick visual summary of the offline job and payment tracker.</span></span>
+              <span class="slide-count">1 / 7</span>
+            </figcaption>
+          </figure>
+
+          <figure class="guide-slide is-next" data-title="Product overview">
+            <img src="assets/jobdue-guide-product.png" alt="JobDue product overview visual showing the tracker and core benefits" width="1448" height="1086" loading="lazy" decoding="async">
+            <figcaption class="slide-caption">
+              <span><strong>Product overview</strong><span>Shows the tracker, supported devices, and core value in one view.</span></span>
+              <span class="slide-count">2 / 7</span>
+            </figcaption>
+          </figure>
+
+          <figure class="guide-slide is-after" data-title="Today view">
+            <img src="assets/jobdue-guide-today.png" alt="JobDue Today view visual showing payment and follow-up priorities" width="1448" height="1086" loading="lazy" decoding="async">
+            <figcaption class="slide-caption">
+              <span><strong>Today view</strong><span>Money to collect, follow-ups due, review requests, and unpaid balance.</span></span>
+              <span class="slide-count">3 / 7</span>
+            </figcaption>
+          </figure>
+
+          <figure class="guide-slide" data-title="Jobs view">
+            <img src="assets/jobdue-guide-jobs.png" alt="JobDue Jobs view visual showing job tracking details" width="1448" height="1086" loading="lazy" decoding="async">
+            <figcaption class="slide-caption">
+              <span><strong>Jobs view</strong><span>Client, job status, next action, follow-up dates, and balance tracking.</span></span>
+              <span class="slide-count">4 / 7</span>
+            </figcaption>
+          </figure>
+
+          <figure class="guide-slide" data-title="Money view">
+            <img src="assets/jobdue-guide-money.png" alt="JobDue Money view visual showing unpaid and paid job tracking" width="1448" height="1086" loading="lazy" decoding="async">
+            <figcaption class="slide-caption">
+              <span><strong>Money view</strong><span>Overdue, unpaid, and paid jobs separated for faster checking.</span></span>
+              <span class="slide-count">5 / 7</span>
+            </figcaption>
+          </figure>
+
+          <figure class="guide-slide" data-title="Data and backup">
+            <img src="assets/jobdue-guide-data.png" alt="JobDue Data view visual showing backup, import, export, and local data controls" width="1448" height="1086" loading="lazy" decoding="async">
+            <figcaption class="slide-caption">
+              <span><strong>Data and backup</strong><span>Export backup, import backup, export CSV, and local data reminders.</span></span>
+              <span class="slide-count">6 / 7</span>
+            </figcaption>
+          </figure>
+
+          <figure class="guide-slide" data-title="What is included">
+            <img src="assets/jobdue-guide-included.jpg" alt="JobDue included package visual showing what buyers receive" width="3651" height="2739" loading="lazy" decoding="async">
+            <figcaption class="slide-caption">
+              <span><strong>What is included</strong><span>App file, setup videos, backup guide, troubleshooting, and sample data.</span></span>
+              <span class="slide-count">7 / 7</span>
+            </figcaption>
+          </figure>
+
+          <div class="carousel-controls">
+            <div class="control-group" aria-label="Carousel controls">
+              <button class="carousel-button" type="button" data-carousel-prev aria-label="Show previous product guide image">&#8592;</button>
+              <button class="carousel-button" type="button" data-carousel-next aria-label="Show next product guide image">&#8594;</button>
+            </div>
+            <div class="current-label" data-carousel-label>Launch cover</div>
+          </div>
+        </div>
+
+        <div class="thumb-list" role="tablist" aria-label="Choose a product guide image">
+          <button class="thumb-button" type="button" role="tab" aria-selected="true" data-slide-to="0">Cover</button>
+          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="1">Overview</button>
+          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="2">Today</button>
+          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="3">Jobs</button>
+          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="4">Money</button>
+          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="5">Backup</button>
+          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="6">Included</button>
+        </div>
+
+      </section>
+
+      <div class="noscript-grid" aria-label="JobDue product guide images">
+        <figure class="noscript-frame">
+          <img src="assets/jobdue-guide-cover.jpg" alt="JobDue cover image for the contractor job and payment tracker" width="3651" height="2739">
+          <figcaption>Launch cover</figcaption>
+        </figure>
+        <figure class="noscript-frame">
+          <img src="assets/jobdue-guide-product.png" alt="JobDue product overview visual showing the tracker and core benefits" width="1448" height="1086">
+          <figcaption>Product overview</figcaption>
+        </figure>
+        <figure class="noscript-frame">
+          <img src="assets/jobdue-guide-today.png" alt="JobDue Today view visual showing payment and follow-up priorities" width="1448" height="1086">
+          <figcaption>Today view</figcaption>
+        </figure>
+        <figure class="noscript-frame">
+          <img src="assets/jobdue-guide-jobs.png" alt="JobDue Jobs view visual showing job tracking details" width="1448" height="1086">
+          <figcaption>Jobs view</figcaption>
+        </figure>
+        <figure class="noscript-frame">
+          <img src="assets/jobdue-guide-money.png" alt="JobDue Money view visual showing unpaid and paid job tracking" width="1448" height="1086">
+          <figcaption>Money view</figcaption>
+        </figure>
+        <figure class="noscript-frame">
+          <img src="assets/jobdue-guide-data.png" alt="JobDue Data view visual showing backup, import, export, and local data controls" width="1448" height="1086">
+          <figcaption>Data and backup view</figcaption>
+        </figure>
+        <figure class="noscript-frame">
+          <img src="assets/jobdue-guide-included.jpg" alt="JobDue included package visual showing what buyers receive" width="3651" height="2739">
+          <figcaption>What is included</figcaption>
+        </figure>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var slides = Array.prototype.slice.call(document.querySelectorAll(".guide-slide"));
+      var thumbs = Array.prototype.slice.call(document.querySelectorAll(".thumb-button"));
+      var label = document.querySelector("[data-carousel-label]");
+      var prev = document.querySelector("[data-carousel-prev]");
+      var next = document.querySelector("[data-carousel-next]");
+      var activeIndex = 0;
+
+      if (!slides.length) {
+        return;
+      }
+
+      function wrap(index) {
+        return (index + slides.length) % slides.length;
+      }
+
+      function update(index) {
+        activeIndex = wrap(index);
+
+        slides.forEach(function (slide, slideIndex) {
+          slide.classList.remove("is-active", "is-next", "is-after");
+
+          if (slideIndex === activeIndex) {
+            slide.classList.add("is-active");
+          } else if (slideIndex === wrap(activeIndex + 1)) {
+            slide.classList.add("is-next");
+          } else if (slideIndex === wrap(activeIndex + 2)) {
+            slide.classList.add("is-after");
+          }
+        });
+
+        thumbs.forEach(function (thumb, thumbIndex) {
+          thumb.setAttribute("aria-selected", thumbIndex === activeIndex ? "true" : "false");
+        });
+
+        if (label) {
+          label.textContent = slides[activeIndex].getAttribute("data-title") || "";
+        }
+      }
+
+      thumbs.forEach(function (thumb) {
+        thumb.addEventListener("click", function () {
+          update(Number(thumb.getAttribute("data-slide-to")));
+        });
+      });
+
+      if (prev) {
+        prev.addEventListener("click", function () {
+          update(activeIndex - 1);
+        });
+      }
+
+      if (next) {
+        next.addEventListener("click", function () {
+          update(activeIndex + 1);
+        });
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowLeft") {
+          update(activeIndex - 1);
+        }
+
+        if (event.key === "ArrowRight") {
+          update(activeIndex + 1);
+        }
+
+        if (/^[1-7]$/.test(event.key)) {
+          update(Number(event.key) - 1);
+        }
+      });
+    }());
+  </script>
+</body>
+</html>

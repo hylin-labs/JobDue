@@ -1,0 +1,51 @@
+JobDue Personal Use License
+
+Last updated: 2026-05-12
+
+Release: JobDue V1
+
+This license applies to the JobDue files included with your purchase.
+
+1. What You Can Do
+
+You may use JobDue for your own business or personal work.
+
+You may make backup copies for your own use.
+
+You may move your own JobDue files and backups between your own devices.
+
+2. What You Cannot Do
+
+You may not resell, share, upload, publish, or redistribute JobDue as a product, template, download, or bundle.
+
+You may not claim JobDue as your own product.
+
+You may not remove the product name or license terms and sell it to others.
+
+You may not use JobDue as part of a competing product, template shop item, or software bundle.
+
+3. No Cloud Service Included
+
+JobDue is an offline browser app.
+
+Your jobs are saved in your browser on your device.
+
+No account, subscription, cloud sync, payment processing, invoice sending, QuickBooks integration, or team dispatch service is included.
+
+4. Backups Are Your Responsibility
+
+Use Export Backup to save a portable copy of your data.
+
+Clearing browser data, using private browsing, changing devices, or changing browsers can remove or hide saved jobs unless you have exported a backup.
+
+5. No Warranty
+
+JobDue is provided as-is.
+
+The seller is not responsible for lost data, missed jobs, missed payments, business losses, device problems, browser problems, or misuse of the product.
+
+Always keep your own backup records for important business information.
+
+6. Support
+
+Support, updates, and refunds are handled according to the marketplace or seller terms where you purchased JobDue.

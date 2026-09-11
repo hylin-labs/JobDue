@@ -1,0 +1,2 @@
+Existing approved landing images/screenshots copied byte-for-byte with JobDue filenames where needed.
+MP4 files are generated from JobDue-branded sources so no old product name appears inside video frames.
