@@ -3,8 +3,8 @@
 JobDue is a no-login browser app for solo contractors and home-service pros.
 It helps users track jobs, unpaid balances, follow-ups, payment status, review requests, and local backup/export.
 
-Canonical site: https://app.hi-craniai.workers.dev/
-Product guide: https://app.hi-craniai.workers.dev/infographics.html
+Canonical site: https://www.craniai.com/
+Product guide: https://www.craniai.com/infographics.html
 Purchase: https://buy.stripe.com/fZu3cu6WQebzeRxasv4c800
 Support: hi.craniai@gmail.com
 
