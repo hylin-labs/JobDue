@@ -5,10 +5,10 @@ It helps users track jobs, unpaid balances, follow-ups, payment status, review r
 
 Canonical site: https://app.hi-craniai.workers.dev/
 Product guide: https://app.hi-craniai.workers.dev/infographics.html
-Purchase: https://gumroad.com/l/jobdue-launch-placeholder
+Purchase: https://buy.stripe.com/fZu3cu6WQebzeRxasv4c800
 Support: hi.craniai@gmail.com
 
-Current offer: $14.99 early-bird launch price through the Gumroad promotion link. Regular listing price is $29.99.
+Current offer: $14.99 early-bird launch price through secure Stripe checkout. Regular listing price is $29.99.
 
 Important product boundaries:
 JobDue is not cloud sync, invoice sending, payment processing, dispatch software, team routing, QuickBooks integration, payroll software, or full accounting software.
