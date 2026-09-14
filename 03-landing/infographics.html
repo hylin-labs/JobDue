@@ -279,7 +279,8 @@
       opacity: 0;
       pointer-events: none;
       transform: translateX(42px) translateY(22px) scale(0.93);
-      transition: opacity 220ms ease, transform 320ms ease, box-shadow 220ms ease;
+      will-change: opacity, transform;
+      transition: opacity 180ms ease, transform 240ms ease, box-shadow 180ms ease;
     }
 
     .guide-slide.is-active {
@@ -291,14 +292,14 @@
 
     .guide-slide.is-next {
       z-index: 3;
-      opacity: 0.56;
+      opacity: 0.4;
       transform: translateX(36px) translateY(28px) scale(0.96);
       box-shadow: var(--shadow-soft);
     }
 
     .guide-slide.is-after {
       z-index: 2;
-      opacity: 0.28;
+      opacity: 0.14;
       transform: translateX(68px) translateY(56px) scale(0.92);
       box-shadow: none;
     }
@@ -618,7 +619,7 @@
 
       <section class="guide-carousel" aria-label="JobDue product guide carousel">
         <div class="carousel-stage" aria-live="polite">
-          <figure class="guide-slide is-active" data-title="Launch cover">
+          <figure class="guide-slide is-active" id="guide-slide-0" role="tabpanel" aria-labelledby="guide-tab-0" aria-hidden="false" data-title="Launch cover">
             <img src="assets/jobdue-guide-cover.webp" alt="JobDue cover image for the contractor job and payment tracker" width="3651" height="2739" decoding="async">
             <figcaption class="slide-caption">
               <span><strong>Launch cover</strong><span>Quick visual summary of the offline job and payment tracker.</span></span>
@@ -626,7 +627,7 @@
             </figcaption>
           </figure>
 
-          <figure class="guide-slide is-next" data-title="Product overview">
+          <figure class="guide-slide is-next" id="guide-slide-1" role="tabpanel" aria-labelledby="guide-tab-1" aria-hidden="true" data-title="Product overview">
             <img src="assets/jobdue-guide-product.png" alt="JobDue product overview visual showing the tracker and core benefits" width="1448" height="1086" loading="lazy" decoding="async">
             <figcaption class="slide-caption">
               <span><strong>Product overview</strong><span>Shows the tracker, supported devices, and core value in one view.</span></span>
@@ -634,7 +635,7 @@
             </figcaption>
           </figure>
 
-          <figure class="guide-slide is-after" data-title="Today view">
+          <figure class="guide-slide is-after" id="guide-slide-2" role="tabpanel" aria-labelledby="guide-tab-2" aria-hidden="true" data-title="Today view">
             <img src="assets/jobdue-guide-today.png" alt="JobDue Today view visual showing payment and follow-up priorities" width="1448" height="1086" loading="lazy" decoding="async">
             <figcaption class="slide-caption">
               <span><strong>Today view</strong><span>Money to collect, follow-ups due, review requests, and unpaid balance.</span></span>
@@ -642,7 +643,7 @@
             </figcaption>
           </figure>
 
-          <figure class="guide-slide" data-title="Jobs view">
+          <figure class="guide-slide" id="guide-slide-3" role="tabpanel" aria-labelledby="guide-tab-3" aria-hidden="true" data-title="Jobs view">
             <img src="assets/jobdue-guide-jobs.png" alt="JobDue Jobs view visual showing job tracking details" width="1448" height="1086" loading="lazy" decoding="async">
             <figcaption class="slide-caption">
               <span><strong>Jobs view</strong><span>Client, job status, next action, follow-up dates, and balance tracking.</span></span>
@@ -650,7 +651,7 @@
             </figcaption>
           </figure>
 
-          <figure class="guide-slide" data-title="Money view">
+          <figure class="guide-slide" id="guide-slide-4" role="tabpanel" aria-labelledby="guide-tab-4" aria-hidden="true" data-title="Money view">
             <img src="assets/jobdue-guide-money.png" alt="JobDue Money view visual showing unpaid and paid job tracking" width="1448" height="1086" loading="lazy" decoding="async">
             <figcaption class="slide-caption">
               <span><strong>Money view</strong><span>Overdue, unpaid, and paid jobs separated for faster checking.</span></span>
@@ -658,7 +659,7 @@
             </figcaption>
           </figure>
 
-          <figure class="guide-slide" data-title="Data and backup">
+          <figure class="guide-slide" id="guide-slide-5" role="tabpanel" aria-labelledby="guide-tab-5" aria-hidden="true" data-title="Data and backup">
             <img src="assets/jobdue-guide-data.png" alt="JobDue Data view visual showing backup, import, export, and local data controls" width="1448" height="1086" loading="lazy" decoding="async">
             <figcaption class="slide-caption">
               <span><strong>Data and backup</strong><span>Export backup, import backup, export CSV, and local data reminders.</span></span>
@@ -666,7 +667,7 @@
             </figcaption>
           </figure>
 
-          <figure class="guide-slide" data-title="What is included">
+          <figure class="guide-slide" id="guide-slide-6" role="tabpanel" aria-labelledby="guide-tab-6" aria-hidden="true" data-title="What is included">
             <img src="assets/jobdue-guide-included.jpg" alt="JobDue included package visual showing what buyers receive" width="3651" height="2739" loading="lazy" decoding="async">
             <figcaption class="slide-caption">
               <span><strong>What is included</strong><span>App file, setup videos, backup guide, troubleshooting, and sample data.</span></span>
@@ -684,13 +685,13 @@
         </div>
 
         <div class="thumb-list" role="tablist" aria-label="Choose a product guide image">
-          <button class="thumb-button" type="button" role="tab" aria-selected="true" data-slide-to="0">Cover</button>
-          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="1">Overview</button>
-          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="2">Today</button>
-          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="3">Jobs</button>
-          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="4">Money</button>
-          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="5">Backup</button>
-          <button class="thumb-button" type="button" role="tab" aria-selected="false" data-slide-to="6">Included</button>
+          <button class="thumb-button" id="guide-tab-0" type="button" role="tab" aria-controls="guide-slide-0" aria-selected="true" tabindex="0" data-slide-to="0">Cover</button>
+          <button class="thumb-button" id="guide-tab-1" type="button" role="tab" aria-controls="guide-slide-1" aria-selected="false" tabindex="-1" data-slide-to="1">Overview</button>
+          <button class="thumb-button" id="guide-tab-2" type="button" role="tab" aria-controls="guide-slide-2" aria-selected="false" tabindex="-1" data-slide-to="2">Today</button>
+          <button class="thumb-button" id="guide-tab-3" type="button" role="tab" aria-controls="guide-slide-3" aria-selected="false" tabindex="-1" data-slide-to="3">Jobs</button>
+          <button class="thumb-button" id="guide-tab-4" type="button" role="tab" aria-controls="guide-slide-4" aria-selected="false" tabindex="-1" data-slide-to="4">Money</button>
+          <button class="thumb-button" id="guide-tab-5" type="button" role="tab" aria-controls="guide-slide-5" aria-selected="false" tabindex="-1" data-slide-to="5">Backup</button>
+          <button class="thumb-button" id="guide-tab-6" type="button" role="tab" aria-controls="guide-slide-6" aria-selected="false" tabindex="-1" data-slide-to="6">Included</button>
         </div>
 
       </section>
@@ -736,6 +737,7 @@
       var prev = document.querySelector("[data-carousel-prev]");
       var next = document.querySelector("[data-carousel-next]");
       var activeIndex = 0;
+      var carousel = document.querySelector(".guide-carousel");
 
       if (!slides.length) {
         return;
@@ -758,10 +760,13 @@
           } else if (slideIndex === wrap(activeIndex + 2)) {
             slide.classList.add("is-after");
           }
+
+          slide.setAttribute("aria-hidden", slideIndex === activeIndex ? "false" : "true");
         });
 
         thumbs.forEach(function (thumb, thumbIndex) {
           thumb.setAttribute("aria-selected", thumbIndex === activeIndex ? "true" : "false");
+          thumb.tabIndex = thumbIndex === activeIndex ? 0 : -1;
         });
 
         if (label) {
@@ -787,19 +792,31 @@
         });
       }
 
-      document.addEventListener("keydown", function (event) {
+      if (carousel) {
+        carousel.addEventListener("keydown", function (event) {
+          if (!event.target.closest(".thumb-button, .carousel-button")) {
+            return;
+          }
+
         if (event.key === "ArrowLeft") {
+          event.preventDefault();
           update(activeIndex - 1);
+          thumbs[activeIndex].focus();
         }
 
         if (event.key === "ArrowRight") {
+          event.preventDefault();
           update(activeIndex + 1);
+          thumbs[activeIndex].focus();
         }
 
         if (/^[1-7]$/.test(event.key)) {
+          event.preventDefault();
           update(Number(event.key) - 1);
+          thumbs[activeIndex].focus();
         }
-      });
+        });
+      }
     }());
   </script>
 </body>

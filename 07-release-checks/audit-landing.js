@@ -45,6 +45,25 @@ function assert(condition, message) {
       stripeLinks: Array.from(document.querySelectorAll('a[href*="buy.stripe.com"]')).length,
       heading: document.querySelector('h1')?.textContent?.trim()
     }));
+
+    if (width <= 1080) {
+      const menuToggle = page.locator('[data-menu-toggle]');
+      await menuToggle.click();
+      const menuState = await page.evaluate(() => ({
+        expanded: document.querySelector('[data-menu-toggle]')?.getAttribute('aria-expanded'),
+        visible: document.getElementById('primary-navigation')?.classList.contains('is-open'),
+        links: Array.from(document.querySelectorAll('#primary-navigation a:not(.button)')).length
+      }));
+      assert(menuState.expanded === 'true', `${name}: mobile menu did not announce expanded state`);
+      assert(menuState.visible, `${name}: mobile menu did not open`);
+      assert(menuState.links === 5, `${name}: mobile menu is missing navigation links`);
+      if (name === 'mobile-390') {
+        await page.screenshot({ path: path.join(outputDir, 'mobile-menu-open.png') });
+      }
+      await page.keyboard.press('Escape');
+      assert(await menuToggle.getAttribute('aria-expanded') === 'false', `${name}: mobile menu did not close with Escape`);
+    }
+
     try {
       assert(!state.overflow, `${name}: horizontal overflow`);
       assert(state.brokenImages.length === 0, `${name}: broken images ${state.brokenImages.join(', ')}`);
@@ -64,6 +83,16 @@ function assert(condition, message) {
   await guide.evaluate(() => document.querySelectorAll('img[loading="lazy"]').forEach(image => { image.loading = 'eager'; }));
   await guide.waitForFunction(() => Array.from(document.images).every(image => image.complete));
   await guide.getByRole('tab', { name: 'Included' }).click();
+  await guide.waitForTimeout(280);
+  await guide.getByRole('tab', { name: 'Included' }).press('ArrowLeft');
+  await guide.waitForTimeout(280);
+  const keyboardState = await guide.evaluate(() => ({
+    activeTitle: document.querySelector('.guide-slide.is-active')?.getAttribute('data-title'),
+    activeSlideHidden: document.querySelector('.guide-slide.is-active')?.getAttribute('aria-hidden'),
+    activeTab: document.querySelector('.thumb-button[aria-selected="true"]')?.textContent?.trim()
+  }));
+  await guide.getByRole('tab', { name: 'Included' }).click();
+  await guide.waitForTimeout(280);
   await guide.screenshot({ path: path.join(outputDir, 'product-guide-included.png'), fullPage: true });
   const guideState = await guide.evaluate(() => ({
     activeTitle: document.querySelector('.guide-slide.is-active')?.getAttribute('data-title'),
@@ -74,6 +103,9 @@ function assert(condition, message) {
     assert(guideState.activeTitle === 'What is included', 'guide: Included tab did not activate');
     assert(guideState.brokenImages.length === 0, `guide: broken images ${guideState.brokenImages.join(', ')}`);
     assert(!guideState.oldBrandText, 'guide: old brand text rendered');
+    assert(keyboardState.activeTitle === 'Data and backup', 'guide: ArrowLeft did not select the previous guide tab');
+    assert(keyboardState.activeSlideHidden === 'false', 'guide: active slide is hidden from assistive technology');
+    assert(keyboardState.activeTab === 'Backup', 'guide: keyboard focus did not update the active tab');
   } catch (error) {
     failures.push(error.message);
   }
