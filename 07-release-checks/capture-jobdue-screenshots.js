@@ -1,11 +1,14 @@
 
 const { chromium } = require('playwright');
 const path = require('path');
+const fs = require('fs');
 
 (async () => {
   const repoRoot = path.resolve(__dirname, '..');
   const appFile = path.join(repoRoot, '02-app-pwa', 'JobDue.html');
   const outDir = path.join(repoRoot, '05-listing-assets', 'screenshots');
+  const logoFile = path.join(repoRoot, '01-brand-system', 'jobdue-logo-source.png');
+  const logoDataUri = 'data:image/png;base64,' + fs.readFileSync(logoFile).toString('base64');
   const pageUrl = 'file:///' + appFile.replace(/\\/g, '/') + '?demo=1';
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage({
@@ -35,7 +38,7 @@ const path = require('path');
     body { margin: 0; min-height: 100vh; font-family: Arial, sans-serif; color: #10252d; background: #edf4f5; }
     main { min-height: 100vh; padding: 72px; background: linear-gradient(135deg, #eff7f7 0 70%, #dceef0 70%); }
     .brand { display: flex; align-items: center; gap: 18px; color: #126f76; font-size: 30px; font-weight: 800; }
-    .mark { display: grid; width: 64px; height: 64px; place-items: center; border-radius: 18px; background: #167b82; color: #fff; font-size: 27px; box-shadow: 0 12px 28px rgba(22, 124, 130, .2); }
+    .brand-logo { width: 64px; height: 64px; object-fit: contain; }
     h1 { max-width: 800px; margin: 38px 0 12px; font-size: 68px; line-height: 1.02; letter-spacing: -2px; }
     .lead { max-width: 680px; margin: 0; color: #52666c; font-size: 28px; line-height: 1.4; }
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 56px; }
@@ -44,7 +47,7 @@ const path = require('path');
     h2 { margin: 72px 0 12px; font-size: 30px; line-height: 1.15; }
     .card p { margin: 0; color: #52666c; font-size: 21px; line-height: 1.4; }
     footer { display: flex; align-items: center; justify-content: space-between; margin-top: 52px; padding-top: 26px; border-top: 2px solid #c9dfe1; color: #126f76; font-size: 22px; font-weight: 700; }
-  </style></head><body><main><div class="brand"><span class="mark">JD</span><span>JobDue</span></div><h1>Everything you need to get moving.</h1><p class="lead">One download for tracking jobs, following up, and keeping a backup of your records.</p><section class="grid"><article class="card"><span class="number">1</span><h2>JobDue app</h2><p>Your no-login job, payment, and follow-up tracker.</p></article><article class="card"><span class="number">2</span><h2>Setup guides</h2><p>Clear desktop, iPhone, iPad, and Android steps.</p></article><article class="card"><span class="number">3</span><h2>Backup guide</h2><p>Simple export and import instructions for your data.</p></article><article class="card"><span class="number">4</span><h2>Sample data</h2><p>Explore the workflow before adding your own jobs.</p></article></section><footer><span>Track jobs. Follow up. Get paid.</span><span>One-time digital product</span></footer></main></body></html>`);
+  </style></head><body><main><div class="brand"><img class="brand-logo" src="${logoDataUri}" alt=""><span>JobDue</span></div><h1>Everything you need to get moving.</h1><p class="lead">One download for tracking jobs, following up, and keeping a backup of your records.</p><section class="grid"><article class="card"><span class="number">1</span><h2>JobDue app</h2><p>Your no-login job, payment, and follow-up tracker.</p></article><article class="card"><span class="number">2</span><h2>Setup guides</h2><p>Clear desktop, iPhone, iPad, and Android steps.</p></article><article class="card"><span class="number">3</span><h2>Backup guide</h2><p>Simple export and import instructions for your data.</p></article><article class="card"><span class="number">4</span><h2>Sample data</h2><p>Explore the workflow before adding your own jobs.</p></article></section><footer><span>Track jobs. Follow up. Get paid.</span><span>One-time digital product</span></footer></main></body></html>`);
   await includedPage.screenshot({ path: path.join(outDir, 'jobdue-included-desktop-2x.jpg'), type: 'jpeg', quality: 92, fullPage: false });
   await includedPage.close();
   await browser.close();
